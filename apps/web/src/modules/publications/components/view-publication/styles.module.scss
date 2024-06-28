@@ -1,0 +1,43 @@
+.nextPrevButtons {
+  border: 1px solid black;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  padding: 5px;
+  background-color: aqua;
+  cursor: pointer;
+  margin-left: 4px;
+
+  &:hover {
+    border-right: 3px solid darkmagenta;
+    border-bottom: 3px solid darkmagenta;
+  }
+
+  &:active {
+    background-color: darkmagenta;
+  }
+}
+
+.carouselContainer {
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+.titleContainer {
+  padding: 10px;
+  background-color: aqua;
+  border: 1px solid black;
+}
+
+.carouselControllersContainer {
+  margin-bottom: 10px;
+  flex-direction: row;
+  display: flex;
+  justify-content: right;
+}
+
+.descriptionContainer {
+  padding: 20px 0;
+  background-color: whitesmoke;
+}
