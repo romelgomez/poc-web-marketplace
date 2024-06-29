@@ -37,7 +37,9 @@ import { UserModule } from './modules/users/user.module';
       driver: ApolloDriver,
       useFactory: async () => ({
         driver: ApolloDriver,
-        autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+        // TODO remove the hardcode path
+        // added at .nxignore to avoid reloading
+        autoSchemaFile: join(process.cwd(), 'apps/api/src/schema.gql'),
         faviconUrl: '',
       }),
     }),

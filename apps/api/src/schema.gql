@@ -2,6 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String
+  email: String!
+  secondName: String
+  secondLastName: String
+  document: String
+  documentType: String
+  nationality: String
+  birthday: DateTime
+  tag: ID
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Listing {
   id: ID!
   name: String
@@ -17,25 +36,6 @@ type Listing {
 enum ListingVisibility {
   PUBLIC
   PRIVATE
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type User {
-  id: ID!
-  firstName: String!
-  lastName: String
-  email: String!
-  secondName: String
-  secondLastName: String
-  document: String
-  documentType: String
-  nationality: String
-  birthday: DateTime
-  tag: ID
 }
 
 type Account {
