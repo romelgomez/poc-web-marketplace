@@ -1,6 +1,6 @@
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { Listing } from 'src/modules/listings/listing.entity';
-import type { PublicationMedia } from 'src/modules/publication-media/publication-media.entity';
+import type { PublicationMedia } from '../publication-media/publication-media.entity';
+import { Listing } from '../listings/listing.entity';
 
 export enum PublicationVisibility {
   PUBLIC = 'PUBLIC',
