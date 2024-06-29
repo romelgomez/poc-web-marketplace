@@ -1,0 +1,201 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id       String    @id @default(uuid()) @db.Uuid
+  name     String?   @db.VarChar
+  disabled Boolean   @default(false)
+  ownerId  String?   @db.Uuid
+  slug     String?   @db.VarChar
+  tag      String?   @db.VarChar
+  user     User?     @relation(fields: [ownerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  listings Listing[]
+  roles    Role[]
+  created  DateTime  @default(now()) @db.Timestamp(6)
+  modified DateTime  @default(now()) @db.Timestamp(6)
+  deleted  DateTime? @db.Timestamp(6)
+}
+
+model Address {
+  id       String      @id @default(uuid()) @db.Uuid
+  location String      @db.VarChar
+  district String      @db.VarChar
+  type     AddressType @default(RESIDENTIAL)
+  tag      String?     @db.VarChar
+  created  DateTime    @default(now()) @db.Timestamp(6)
+  modified DateTime    @default(now()) @db.Timestamp(6)
+  deleted  DateTime?   @db.Timestamp(6)
+}
+
+model Category {
+  id       String    @id @default(uuid()) @db.Uuid
+  tag      String?   @db.VarChar
+  name     String    @db.VarChar
+  slug     String    @db.VarChar
+  left     Int
+  right    Int
+  parentId String?   @db.VarChar
+  created  DateTime  @default(now()) @db.Timestamp(6)
+  modified DateTime  @default(now()) @db.Timestamp(6)
+  deleted  DateTime? @db.Timestamp(6)
+}
+
+model Listing {
+  id           String            @id @default(uuid()) @db.Uuid
+  name         String?           @db.VarChar
+  visibility   ListingVisibility @default(PUBLIC)
+  accountId    String?           @db.Uuid
+  description  String?           @db.VarChar
+  tag          String?           @db.VarChar
+  account      Account?          @relation(fields: [accountId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  publications Publication[]
+  created      DateTime          @default(now()) @db.Timestamp(6)
+  modified     DateTime          @default(now()) @db.Timestamp(6)
+  deleted      DateTime?         @db.Timestamp(6)
+}
+
+model Media {
+  id               String             @id @default(uuid()) @db.Uuid
+  type             String             @db.VarChar
+  size             Int
+  version          Int
+  name             String             @db.VarChar
+  tag              String?            @db.VarChar
+  publicationMedia PublicationMedia[]
+  userMedia        UserMedia[]
+  created          DateTime           @default(now()) @db.Timestamp(6)
+  deleted          DateTime?          @db.Timestamp(6)
+}
+
+model Phone {
+  id       String    @id @default(uuid()) @db.Uuid
+  number   String    @db.VarChar
+  type     PhoneType @default(CELLULAR)
+  tag      String?   @db.VarChar
+  created  DateTime  @default(now()) @db.Timestamp(6)
+  modified DateTime  @default(now()) @db.Timestamp(6)
+  deleted  DateTime? @db.Timestamp(6)
+}
+
+model Publication {
+  id               String                @id @default(uuid()) @db.Uuid
+  title            String                @db.VarChar
+  description      String                @db.VarChar
+  visibility       PublicationVisibility @default(PUBLIC)
+  listingId        String?               @db.Uuid
+  tag              String?               @db.VarChar
+  listing          Listing?              @relation(fields: [listingId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  publicationMedia PublicationMedia[]
+  created          DateTime              @default(now()) @db.Timestamp(6)
+  modified         DateTime              @default(now()) @db.Timestamp(6)
+  deleted          DateTime?             @db.Timestamp(6)
+}
+
+model PublicationMedia {
+  id            String      @id @default(uuid()) @db.Uuid
+  publicationId String      @db.Uuid
+  mediaId       String      @db.Uuid
+  tag           String?     @db.VarChar
+  media         Media       @relation(fields: [mediaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  publication   Publication @relation(fields: [publicationId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  created       DateTime    @default(now()) @db.Timestamp(6)
+  modified      DateTime    @default(now()) @db.Timestamp(6)
+  deleted       DateTime?   @db.Timestamp(6)
+}
+
+model Role {
+  id        String    @id @default(uuid()) @db.Uuid
+  assigned  DateTime  @db.Timestamp(6)
+  role      RoleType  @default(VIEWER)
+  userId    String?   @db.Uuid
+  accountId String?   @db.Uuid
+  tag       String?   @db.VarChar
+  account   Account?  @relation(fields: [accountId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user      User?     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  created   DateTime  @default(now()) @db.Timestamp(6)
+  modified  DateTime  @default(now()) @db.Timestamp(6)
+  deleted   DateTime? @db.Timestamp(6)
+}
+
+model User {
+  id             String            @id @default(uuid()) @db.Uuid
+  firstName      String?           @db.VarChar
+  lastName       String?           @db.VarChar
+  email          String            @db.VarChar
+  secondName     String?           @db.VarChar
+  secondLastName String?           @db.VarChar
+  document       String?           @db.VarChar
+  documentType   String?           @db.VarChar
+  nationality    String?           @db.VarChar
+  birthday       DateTime?         @db.Timestamp(6)
+  maritalStatus  UserMaritalStatus @default(SINGLE)
+  tag            String?           @db.VarChar
+  accounts       Account[]
+  roles          Role[]
+  media          UserMedia[]
+  created        DateTime          @default(now()) @db.Timestamp(6)
+  modified       DateTime          @default(now()) @db.Timestamp(6)
+  deleted        DateTime?         @db.Timestamp(6)
+}
+
+model UserMedia {
+  id       String    @id @default(uuid()) @db.Uuid
+  userId   String    @db.Uuid
+  mediaId  String    @db.Uuid
+  tag      String?   @db.VarChar
+  user     User      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  media    Media     @relation(fields: [mediaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  created  DateTime  @default(now()) @db.Timestamp(6)
+  modified DateTime  @default(now()) @db.Timestamp(6)
+  deleted  DateTime? @db.Timestamp(6)
+}
+
+enum AddressType {
+  RESIDENTIAL
+  BUSINESS
+  SHIPPING
+  BILLING
+  OTHER
+}
+
+enum ListingVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum PublicationVisibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum PhoneType {
+  LANDLINE
+  CELLULAR
+  OTHER
+}
+
+enum ProfileType {
+  PUBLIC
+  PRIVATE
+}
+
+enum RoleType {
+  OWNER
+  ADMIN
+  MANAGER
+  VIEWER
+}
+
+enum UserMaritalStatus {
+  SINGLE
+  MARRIED
+  SEPARATED
+  DIVORCED
+  WIDOWED
+}
