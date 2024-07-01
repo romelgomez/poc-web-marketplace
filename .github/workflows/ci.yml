@@ -10,52 +10,66 @@ permissions:
   actions: read
   contents: read
 
+# jobs:
+#   main:
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         node-version: [20.x]
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+
+#       - name: Install Nest cli
+#         run: yarn global add @nestjs/cli         
+
+#       - name: Install Nx cli
+#         run: yarn global add nx@latest
+
+#       - name: Install dependencies
+#         run: yarn
+
+#       - name: Run Nx affected
+#         run: yarn run nx affected -t build
+
+
 jobs:
   main:
     runs-on: ubuntu-latest
-    # steps:
-    #   - uses: actions/checkout@v4
-    #     with:
-    #       fetch-depth: 0
-
-    #   # Connect your workspace on nx.app and uncomment this to enable task distribution.
-    #   # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
-    #   # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
-
-    #   # Cache node_modules
-    #   - uses: actions/setup-node@v3
-    #     with:
-    #       node-version: 20
-    #       cache: "yarn"
-
-    #   - run: yarn install
-    #   - uses: nrwl/nx-set-shas@v4
-
-    #   # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-    #   # - run: npx nx-cloud record -- echo Hello World
-    #   - run: npx nx affected -t lint test build
 
     strategy:
       matrix:
         node-version: [20.x]
 
+
     steps:
+      
       - name: Checkout code
         uses: actions/checkout@v3
-
+            
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Nest cli
-        run: yarn global add @nestjs/cli         
+        run: yarn global add @nestjs/cli
 
       - name: Install Nx cli
         run: yarn global add nx@latest
 
       - name: Install dependencies
         run: yarn
+            
+      - name: Build
+        run: yarn run nx run api:build
 
       - name: Run Nx affected
         run: yarn run nx affected -t build
