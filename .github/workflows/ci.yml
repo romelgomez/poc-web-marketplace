@@ -69,6 +69,7 @@ jobs:
         run: yarn
             
       - name: Build
+        working-directory: apps/api
         run: yarn run nx run api:build
 
       - name: Run Nx affected
