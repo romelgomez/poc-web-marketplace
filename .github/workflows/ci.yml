@@ -28,39 +28,22 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
-        working-directory: apps/api
-        run: yarn install
-
       - name: Install Nest cli
         run: yarn global add @nestjs/cli 
 
-      - name: Install Nx
+      - name: Install Nx cli
         run: yarn global add nx@latest
 
+      - name: Install dependencies
+        run: yarn install
+
       - name: Build
-        working-directory: apps/api
-        run: npx nx run api:build
+        run: yarn run nx run api:build
 
-
-
-      # Connect your workspace on nx.app and uncomment this to enable task distribution.
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
-      # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
-
-      # - name: Install dependencies
-      #   # working-directory: apps/api
-      #   run: yarn install
- 
       # - run: yarn install
       # - uses: nrwl/nx-set-shas@v4
 
 
-      # - run: npx nx run api:build 
-
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: npx nx-cloud record -- echo Hello World
-      # - run: npx nx affected -t build
       - name: Run Nx affected
         run: yarn run nx affected -t build
 
