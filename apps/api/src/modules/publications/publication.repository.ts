@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { Prisma } from '@prisma/client';
+// import type { Prisma } from '@prisma/client';
 import { validate as validateUUID } from 'uuid';
 import type { Media } from '../media/media.entity';
 import type { MediaInput } from '../media/media.input';
@@ -10,16 +10,16 @@ import { PrismaService } from '../prisma/prisma.service';
 import type { Publication } from './publication.entity';
 import type { PublicationInput } from './publication.input';
 
-type MediaConnectOrCreateInput = {
-  media: {
-    connectOrCreate?: {
-      where: Prisma.MediaWhereUniqueInput;
-      create: Prisma.MediaCreateInput;
-    };
-  };
-};
+// type MediaConnectOrCreateInput = {
+//   media: {
+//     connectOrCreate?: {
+//       where: Prisma.MediaWhereUniqueInput;
+//       create: Prisma.MediaCreateInput;
+//     };
+//   };
+// };
 
-type MediaDataArray = MediaConnectOrCreateInput[];
+// type MediaDataArray = MediaConnectOrCreateInput[];
 
 @Injectable()
 export class PublicationRepository {
@@ -32,7 +32,8 @@ export class PublicationRepository {
     const { media, ...rest } = createPublicationDto;
 
     const publication = await this.prisma.$transaction(async (prisma) => {
-      let mediaData: MediaDataArray = [];
+      // let mediaData: MediaDataArray = [];
+      let mediaData = [];
 
       if (media && media.length > 0) {
         const existingMediaIds = media.map((m) => m.id);
