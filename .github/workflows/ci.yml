@@ -29,11 +29,15 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        working-directory: apps/api
+        # working-directory: apps/api
         run: yarn install
 
       - name: Install Nest cli
         run: yarn global add @nestjs/cli 
+
+      - name: Build
+        working-directory: apps/api
+        run: yarn build        
 
 
 
