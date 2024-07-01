@@ -41,7 +41,7 @@
 #         run: yarn run nx run api:build
 
 #       # - run: yarn install
-#       # - uses: nrwl/nx-set-shas@v4
+      # - uses: nrwl/nx-set-shas@v4
 
 
 #       - name: Run Nx affected
@@ -91,4 +91,5 @@ jobs:
         run: yarn build
 
       - name: Run Nx affected
+        working-directory: apps/api
         run: yarn run nx affected -t build
