@@ -75,21 +75,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Nest cli
-        working-directory: apps/api
         run: yarn global add @nestjs/cli         
 
       - name: Install Nx cli
-        working-directory: apps/api
         run: yarn global add nx@latest
 
       - name: Install dependencies
-        working-directory: apps/api
         run: yarn
 
-      - name: Build
-        working-directory: apps/api
-        run: yarn build
-
       - name: Run Nx affected
-        working-directory: apps/api
         run: yarn run nx affected -t build
