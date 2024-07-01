@@ -7,6 +7,7 @@
     "api": "nx serve api",
     "web": "nx dev web"
   },
+  "type": "module",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.10.8",
