@@ -9,6 +9,7 @@
   },
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.10.8",
     "@apollo/server": "^4.10.4",
     "@clerk/clerk-sdk-node": "^5.0.12",
     "@clerk/nextjs": "^5.1.6",
