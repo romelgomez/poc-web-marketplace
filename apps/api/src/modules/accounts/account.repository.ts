@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { RoleType } from '@prisma/client';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { PrismaService } from '../prisma/prisma.service';
+import { RoleType } from '../roles/role.entity';
 import type { UserInput } from '../users/user.input';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { UserService } from '../users/user.service';

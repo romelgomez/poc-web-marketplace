@@ -1,10 +1,6 @@
-import { Field, ID, InputType, registerEnumType } from '@nestjs/graphql';
-import { RoleType } from '@prisma/client';
+import { Field, ID, InputType } from '@nestjs/graphql';
 import { IsEnum } from 'class-validator';
-
-registerEnumType(RoleType, {
-  name: 'RoleType',
-});
+import { RoleType } from './role.entity';
 
 @InputType()
 export class RoleInput {

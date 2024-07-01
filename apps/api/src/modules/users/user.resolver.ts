@@ -1,14 +1,10 @@
 import { Args, Mutation, Resolver, registerEnumType } from '@nestjs/graphql';
-import { RoleType } from '@prisma/client';
+import { RoleType } from '../roles/role.entity';
 import { User } from './user.entity';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { UserInput } from './user.input';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { UserService } from './user.service';
-
-registerEnumType(RoleType, {
-  name: 'RoleType',
-});
 
 @Resolver(() => User)
 export class UserResolver {

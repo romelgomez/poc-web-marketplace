@@ -22,3 +22,18 @@ nx serve api
 ❌ > nx run api:build
 ❌ > nx run api:lint
 ❌ > nx run api:test
+
+## biome 
+
+### for all the project 
+
+```
+npx biome format --write . && biome lint --write . && biome check --write .
+```
+
+
+## for api with nx 
+
+nx run api:biome format --write .
+nx run api:biome lint --write . 
+nx run api:biome check --write .

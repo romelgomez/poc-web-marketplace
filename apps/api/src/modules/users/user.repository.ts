@@ -3,10 +3,11 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import type { RoleType, User } from '@prisma/client';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { PrismaService } from '../prisma/prisma.service';
+import type { RoleType } from '../roles/role.entity';
 import type { UserInput } from './user.input';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserRepository {

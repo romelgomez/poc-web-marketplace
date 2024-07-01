@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { RoleType, User } from '@prisma/client';
+import type { RoleType } from '../roles/role.entity';
 import type { UserInput } from './user.input';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { UserRepository } from './user.repository';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {

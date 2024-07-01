@@ -1,7 +1,12 @@
 import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { RoleType } from '@prisma/client';
 
-// Register the RoleType enum with GraphQL
+export enum RoleType {
+  OWNER = 'OWNER',
+  ADMIN = 'ADMIN',
+  MANAGER = 'MANAGER',
+  VIEWER = 'VIEWER',
+}
+
 registerEnumType(RoleType, {
   name: 'RoleType',
 });
@@ -12,7 +17,7 @@ export class Role {
   id: string;
 
   @Field(() => RoleType)
-  role: RoleType;
+  role: typeof RoleType;
 
   @Field(() => ID)
   userId: string;
