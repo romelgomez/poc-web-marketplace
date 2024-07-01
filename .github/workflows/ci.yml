@@ -35,8 +35,11 @@ jobs:
       - name: Install Nest cli
         run: yarn global add @nestjs/cli 
 
+      - name: Install Nx
+        run: yarn global add nx@latest
+
       - name: Build
-        working-directory: apps/api
+        # working-directory: apps/api
         run: npx nx run api:build
 
 
@@ -58,5 +61,6 @@ jobs:
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
       # - run: npx nx affected -t build
-      # - name: Run affected
-      - run: yarn run nx affected -t build
+      - name: Run Nx affected
+        run: yarn run nx affected -t build
+
