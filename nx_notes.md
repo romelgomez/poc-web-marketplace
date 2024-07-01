@@ -37,3 +37,8 @@ npx biome format --write . && biome lint --write . && biome check --write .
 nx run api:biome format --write .
 nx run api:biome lint --write . 
 nx run api:biome check --write .
+
+
+## 
+
+npx nx affected -t build
