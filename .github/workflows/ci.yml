@@ -69,7 +69,7 @@ jobs:
         run: yarn
 
       - name: Check NX version
-        run: nx --version
+        run: yarn run nx --version
             
       - name: Build
         working-directory: apps/api
