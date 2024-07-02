@@ -28,10 +28,10 @@ jobs:
           node-version: 20
           cache: "npm"
 
-      - run: npm install
-      - uses: nrwl/nx-set-shas@v4
+      - name: Set Nx SHAs
+        uses: nrwl/nx-set-shas@v4
 
-      - name: Install Nest cli
+      - name: Install Nest CLI
         run: npm install -g @nestjs/cli
 
       - name: Check Nx version
@@ -40,11 +40,14 @@ jobs:
       - name: Check Node.js version
         run: node --version
 
-      - name: Check Yarn version
+      - name: Check npm version
         run: npm --version
 
       - name: Check Nest version
         run: nest --version
+
+      - run: npm install
+
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
