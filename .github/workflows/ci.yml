@@ -70,7 +70,11 @@ jobs:
       #     echo "Running build with verbose logging..."
       #     npx nx run api:build --verbose
 
+      - name: Get default branch name
+        id: default_branch
+        run: echo "##[set-output name=branch;]$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)"
+
       - name: Run Nx affected
         run: |
           echo "Running Nx affected..."
-          npx nx affected -t build --verbose
+          npx nx affected -t build --base=origin/${{ steps.default_branch.outputs.branch }} --head=HEAD --verbose
