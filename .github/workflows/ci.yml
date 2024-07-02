@@ -46,8 +46,11 @@ jobs:
       - name: Check Nest version
         run: nest --version
 
-      - run: npm install
+      - name: Install the dependencies
+        run: npm install
 
+      - name: Install @nx/nx-linux-x64-gnu needed by this CI
+        run: npm install @nx/nx-linux-x64-gnu@19.4.0
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
