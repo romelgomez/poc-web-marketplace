@@ -79,6 +79,6 @@ It will show tasks that you can run with Nx.
 ## project notes 
 
 
-`npx nx affected -t build` to check the affected
+`npx nx affected --base=main --head=HEAD -t build` to check the affected
 `nx show project api` to show the commands 
 `nx run api:start:dev` to run the api
