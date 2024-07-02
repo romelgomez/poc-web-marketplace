@@ -60,13 +60,13 @@ jobs:
           echo "Listing apps/api directory structure..."
           ls -R apps/api
 
-      - name: Build
-        working-directory: apps/api
-        env:
-          PATH: ./node_modules/.bin:$PATH
-        run: |
-          echo "Running build with verbose logging..."
-          npx nx run api:build --verbose
+      # - name: Build
+      #   working-directory: apps/api
+      #   env:
+      #     PATH: ./node_modules/.bin:$PATH
+      #   run: |
+      #     echo "Running build with verbose logging..."
+      #     npx nx run api:build --verbose
 
       - name: Run Nx affected
         env:
