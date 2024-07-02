@@ -27,8 +27,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies
-        run: yarn
+      - name: Install bun manually
+        run: |
+          echo "Installing bun..."
+          curl -fsSL https://bun.sh/install | bash
+          echo 'export BUN_INSTALL="$HOME/.bun"' >> $GITHUB_ENV
+          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
+          echo 'export BUN_INSTALL="$HOME/.bun"' >> $HOME/.bashrc
+          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $HOME/.bashrc
+          source $HOME/.bashrc
+          echo "Bun version:"
+          bun --version || echo "Bun installation failed."
 
       - name: Print environment variables
         run: |
@@ -50,27 +59,18 @@ jobs:
           echo "Checking Yarn version..."
           yarn --version
 
-      - name: List directory structure
+      - name: Install dependencies
         run: |
-          echo "Listing directory structure..."
-          ls -R
-          
-      - name: List apps/api directory structure
-        run: |
-          echo "Listing apps/api directory structure..."
-          ls -R apps/api
+          echo "Installing dependencies..."
+          yarn
 
       # - name: Build
       #   working-directory: apps/api
-      #   env:
-      #     PATH: ./node_modules/.bin:$PATH
       #   run: |
       #     echo "Running build with verbose logging..."
       #     npx nx run api:build --verbose
 
       - name: Run Nx affected
-        env:
-          PATH: ./node_modules/.bin:$PATH
         run: |
           echo "Running Nx affected..."
           npx nx affected -t build --verbose
