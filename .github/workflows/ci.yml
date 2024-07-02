@@ -52,11 +52,15 @@ jobs:
             
       - name: Build
         working-directory: apps/api
+        env:
+          PATH: ./node_modules/.bin:$PATH
         run: |
           echo "Running build with verbose logging..."
-          yarn nx run api:build --verbose
+          npx nx run api:build --verbose
 
       - name: Run Nx affected
+        env:
+          PATH: ./node_modules/.bin:$PATH
         run: |
           echo "Running Nx affected..."
-          yarn nx affected -t build --verbose
+          npx nx affected -t build --verbose
