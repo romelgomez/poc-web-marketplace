@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@nx/js": "19.3.2",
+    "@nx/nx-linux-x64-gnu":"19.4.0",
     "@nx/workspace": "19.3.2",
     "nx": "19.3.2",
     "@biomejs/biome": "1.8.2",
