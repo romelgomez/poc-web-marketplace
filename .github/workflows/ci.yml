@@ -30,6 +30,13 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Install bun
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          echo 'export BUN_INSTALL="$HOME/.bun"' >> $GITHUB_ENV
+          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
+          source $GITHUB_ENV
+
       - name: Check Nx version
         run: npx nx --version
             
