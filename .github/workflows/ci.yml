@@ -34,8 +34,8 @@ jobs:
         run: |
           curl -fsSL https://bun.sh/install | bash
           echo 'export BUN_INSTALL="$HOME/.bun"' >> $GITHUB_ENV
-          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
-          source $GITHUB_ENV
+          echo 'export PATH="$HOME/.bun/bin:$PATH"' >> $GITHUB_ENV
+          source $HOME/.bashrc
 
       - name: Check Nx version
         run: npx nx --version
