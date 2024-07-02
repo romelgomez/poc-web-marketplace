@@ -30,19 +30,23 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Install bun
-        run: |
-          curl -fsSL https://bun.sh/install | bash
-          echo 'export BUN_INSTALL="$HOME/.bun"' >> $GITHUB_ENV
-          echo 'export PATH="$HOME/.bun/bin:$PATH"' >> $GITHUB_ENV
-          source $HOME/.bashrc
+      - name: Print environment variables
+        run: env
 
       - name: Check Nx version
         run: npx nx --version
+
+      - name: Check Node.js version
+        run: node --version
+
+      - name: Check Yarn version
+        run: yarn --version
             
       - name: Build
         working-directory: apps/api
-        run: npx nx run api:build --verbose
+        run: |
+          echo "Running build with verbose logging..."
+          npx nx run api:build --verbose
 
       - name: Run Nx affected
-        run: npx nx affected -t build
+        run: npx nx affected -t build --verbose
