@@ -49,7 +49,17 @@ jobs:
         run: |
           echo "Checking Yarn version..."
           yarn --version
-            
+
+      - name: List directory structure
+        run: |
+          echo "Listing directory structure..."
+          ls -R
+          
+      - name: List apps/api directory structure
+        run: |
+          echo "Listing apps/api directory structure..."
+          ls -R apps/api
+
       - name: Build
         working-directory: apps/api
         env:
