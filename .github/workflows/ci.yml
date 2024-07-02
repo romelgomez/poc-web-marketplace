@@ -30,6 +30,9 @@ jobs:
       - name: Install Nest CLI
         run: npm install -g @nestjs/cli
 
+      - name: Install @nx/nx-linux-x64-gnu needed by this CI
+        run: npm install @nrwl/cli@latest        
+
       - name: Check Nx version
         run: npx nx --version
 
@@ -45,8 +48,7 @@ jobs:
       - name: Install the dependencies
         run: npm install
 
-      - name: Install @nx/nx-linux-x64-gnu needed by this CI
-        run: npm install @nrwl/cli@latest
+
 
       - name: Run Nx affected commands
         run: npx nx affected --base=main --head=HEAD -t build
