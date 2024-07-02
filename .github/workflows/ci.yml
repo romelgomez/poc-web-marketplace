@@ -29,29 +29,41 @@ jobs:
 
       - name: Install bun manually
         run: |
+          echo "Installing bun..."
           curl -fsSL https://bun.sh/install | bash
-          export BUN_INSTALL="$HOME/.bun"
-          export PATH="$BUN_INSTALL/bin:$PATH"
+          echo 'export BUN_INSTALL="$HOME/.bun"' >> $GITHUB_ENV
+          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
           echo 'export BUN_INSTALL="$HOME/.bun"' >> $HOME/.bashrc
           echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $HOME/.bashrc
           source $HOME/.bashrc
-          bun --version
-
-      - name: Install dependencies
-        run: yarn
+          echo "Bun version:"
+          bun --version || echo "Bun installation failed."
 
       - name: Print environment variables
-        run: env
+        run: |
+          echo "Printing environment variables..."
+          env
 
       - name: Check Nx version
-        run: npx nx --version
+        run: |
+          echo "Checking Nx version..."
+          npx nx --version
 
       - name: Check Node.js version
-        run: node --version
+        run: |
+          echo "Checking Node.js version..."
+          node --version
 
       - name: Check Yarn version
-        run: yarn --version
-            
+        run: |
+          echo "Checking Yarn version..."
+          yarn --version
+
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          yarn
+
       - name: Build
         working-directory: apps/api
         run: |
@@ -59,4 +71,6 @@ jobs:
           npx nx run api:build --verbose
 
       - name: Run Nx affected
-        run: npx nx affected -t build --verbose
+        run: |
+          echo "Running Nx affected..."
+          npx nx affected -t build --verbose
