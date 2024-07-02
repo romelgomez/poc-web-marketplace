@@ -42,7 +42,7 @@ jobs:
             
       - name: Build
         working-directory: apps/api
-        run: npx nx run api:build
+        run: npx nx run api:build --verbose
 
       - name: Run Nx affected
         run: npx nx affected -t build
