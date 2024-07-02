@@ -13,68 +13,24 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.x]
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-            
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          fetch-depth: 0
 
-      - name: Install bun manually
-        run: |
-          echo "Installing bun..."
-          curl -fsSL https://bun.sh/install | bash
-          echo 'export BUN_INSTALL="$HOME/.bun"' >> $GITHUB_ENV
-          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $GITHUB_ENV
-          echo 'export BUN_INSTALL="$HOME/.bun"' >> $HOME/.bashrc
-          echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> $HOME/.bashrc
-          source $HOME/.bashrc
-          echo "Bun version:"
-          bun --version || echo "Bun installation failed."
+      # Connect your workspace on nx.app and uncomment this to enable task distribution.
+      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
+      # - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
 
-      - name: Print environment variables
-        run: |
-          echo "Printing environment variables..."
-          env
+      # Cache node_modules
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "yarn"
 
-      - name: Check Nx version
-        run: |
-          echo "Checking Nx version..."
-          npx nx --version
+      - run: yarn install
+      - uses: nrwl/nx-set-shas@v4
 
-      - name: Check Node.js version
-        run: |
-          echo "Checking Node.js version..."
-          node --version
-
-      - name: Check Yarn version
-        run: |
-          echo "Checking Yarn version..."
-          yarn --version
-
-      - name: Install dependencies
-        run: |
-          echo "Installing dependencies..."
-          yarn
-
-      # - name: Build
-      #   working-directory: apps/api
-      #   run: |
-      #     echo "Running build with verbose logging..."
-      #     npx nx run api:build --verbose
-
-      - name: Get default branch name
-        id: default_branch
-        run: echo "##[set-output name=branch;]$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)"
-
-      - name: Run Nx affected
-        run: |
-          echo "Running Nx affected..."
-          npx nx affected -t build --base=origin/${{ steps.default_branch.outputs.branch }} --head=HEAD --verbose
+      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
+      # - run: npx nx-cloud record -- echo Hello World
+      - run: npx nx affected -t lint test build
