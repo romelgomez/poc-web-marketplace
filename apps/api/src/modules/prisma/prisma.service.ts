@@ -1,9 +1,9 @@
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
-import { AppConfigService } from 'src/modules/config/config.service';
+import { AppConfigService } from '../config/config.service';
 import { PrismaClient } from '@prisma/client';
-import { ProcessEnvEnum } from 'src/modules/config/config.types';
+import { ProcessEnvEnum } from '../config/config.types';
 
 @Injectable()
 export class PrismaService

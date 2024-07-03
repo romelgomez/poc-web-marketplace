@@ -1,6 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import GraphQLJSON from 'graphql-type-json';
-import { PublicationVisibility } from 'src/modules/publications/publication.entity';
+import { PublicationVisibility } from '../../publications/publication.entity';
 
 @ObjectType()
 class MediaOutputDto {

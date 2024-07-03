@@ -85,8 +85,12 @@ It will show tasks that you can run with Nx.
 
 ### api
 
-- `nx show project api` to show the commands 
-- `nx run api:start:dev` to run the api
+<!-- - `nx show project api` to show the commands  -->
+<!-- - `nx run api:start:dev` to run the api -->
+
+- `npx nx build api` to build the api
+- `npx nx serve api` to run the api
+
 
 ### web 
 
@@ -122,4 +126,5 @@ nx g @nx/nest:app apps/api2
 nx serve api2
 nx show project api2-e2e --web
 nx show project api2 --web
+npx nx build api2
 ```
