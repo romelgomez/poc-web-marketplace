@@ -98,6 +98,14 @@ It will show tasks that you can run with Nx.
 - `nx run web:dev` to run the web -->
 
 ```
+nx run web:next:build
+nx run web:next:dev
+nx run web:next:start
+nx run web:serve-static
+```
+
+### web 2
+```
 nx run web2:next:build
 nx run web2:next:dev
 nx run web2:next:start
