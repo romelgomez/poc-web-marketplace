@@ -46,4 +46,4 @@ jobs:
         run: npm install --include=optional
 
       - name: Run Nx affected commands
-        run: npx nx affected --base=main --head=HEAD -t build
+        run: npx nx affected -t build
