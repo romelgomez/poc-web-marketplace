@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "nx next:dev",
+    "build": "nx next:build",
+    "start": "nx next:start",
     "lint": "next lint",
     "update": "npx npm-check-updates -u",
     "test": "jest",

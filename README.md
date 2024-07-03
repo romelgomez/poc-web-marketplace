@@ -94,8 +94,15 @@ It will show tasks that you can run with Nx.
 
 ### web 
 
-- `nx show project web` to show the commands 
-- `nx run web:dev` to run the web
+<!-- - `nx show project web` to show the commands 
+- `nx run web:dev` to run the web -->
+
+```
+nx run web2:next:build
+nx run web2:next:dev
+nx run web2:next:start
+nx run web2:serve-static
+```
 
 ## biome formating & lint & check
 
