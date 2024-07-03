@@ -92,3 +92,13 @@ It will show tasks that you can run with Nx.
 
 - `nx show project web` to show the commands 
 - `nx run web:dev` to run the web
+
+## biome formating & lint & check
+
+- `npx biome format --write .`
+
+- `npx biome lint --write .`
+
+- `npx biome format --write .`
+
+- `npx biome format --write . && biome lint --write . && biome check --write .`

@@ -26,19 +26,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        working-directory: apps/web
-        run: yarn install
-
-      - name: Install Biome
-        run: npm install -g biome
-
-      - name: Biome checks
-        working-directory: apps/web
-        run: biome format --write . && biome lint --write . && biome check --write .
+        run: npm i
 
       - name: Build
-        working-directory: apps/web
-        run: yarn build
+        run: npx nx run web:build
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
