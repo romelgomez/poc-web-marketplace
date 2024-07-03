@@ -28,12 +28,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        working-directory: apps/api
         run: npm install
 
-      - name: Build
-        working-directory: apps/api
-        run: npm run build
-
       - name: Build with npx
-        run: npx nx run api:build
+        run: npx nx build api
