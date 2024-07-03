@@ -35,4 +35,4 @@ jobs:
       #   run: nest --version
 
       - name: Build
-        run: npx nx run api:build --verbose
+        run: npx nx run api:build
