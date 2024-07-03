@@ -16,6 +16,17 @@ jobs:
       matrix:
         node-version: [20.x]
 
+    # services:
+    #   meilisearch:
+    #     image: getmeili/meilisearch:v0.28.1
+    #     ports:
+    #       - 7700:7700
+    #     options: >-
+    #       --health-cmd "curl http://localhost:7700/health | grep -q '\"status\":\"available\"'"
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -26,7 +37,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm i
+        working-directory: apps/api
+        run: yarn install
+
+      - name: Install Biome
+        run: npm install -g biome
+
+      - name: Biome checks
+        working-directory: apps/api
+        run: biome format --write . && biome lint --write . && biome check --write .
 
       - name: Build
-        run: npx nx run api:build
+        working-directory: apps/api
+        run: yarn build
+
+      # - name: Run tests
+      #   working-directory: apps/api
+      #   run: yarn test
