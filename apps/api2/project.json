@@ -1,7 +1,7 @@
 {
-  "name": "api",
+  "name": "api2",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/api/src",
+  "sourceRoot": "apps/api2/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -9,14 +9,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "api:build"
+        "buildTarget": "api2:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "api:build:development"
+          "buildTarget": "api2:build:development"
         },
         "production": {
-          "buildTarget": "api:build:production"
+          "buildTarget": "api2:build:production"
         }
       }
     }

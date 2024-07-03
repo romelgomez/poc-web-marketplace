@@ -85,8 +85,12 @@ It will show tasks that you can run with Nx.
 
 ### api
 
-- `nx show project api` to show the commands 
-- `nx run api:start:dev` to run the api
+<!-- - `nx show project api` to show the commands  -->
+<!-- - `nx run api:start:dev` to run the api -->
+
+- `npx nx build api` to build the api
+- `npx nx serve api` to run the api
+
 
 ### web 
 
@@ -102,3 +106,25 @@ It will show tasks that you can run with Nx.
 - `npx biome format --write .`
 
 - `npx biome format --write . && biome lint --write . && biome check --write .`
+
+## @nx setting in a existing project a mono repo
+
+
+NextJS
+
+```
+nx add @nx/next 
+nx g @nx/next:app apps/web
+nx dev web
+```
+
+NestJS
+
+```
+nx add @nx/nest  
+nx g @nx/nest:app apps/api2  
+nx serve api2
+nx show project api2-e2e --web
+nx show project api2 --web
+npx nx build api2
+```
