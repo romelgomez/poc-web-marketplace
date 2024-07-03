@@ -1,0 +1,38 @@
+name: API v2 CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm i
+
+      # - name: Install Biome
+      #   run: npm install -g biome
+
+      # - name: Biome checks
+      #   run: biome format --write . && biome lint --write . && biome check --write .
+
+      - name: Build
+        run: npx nx run api:build
