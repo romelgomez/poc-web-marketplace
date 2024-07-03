@@ -14,38 +14,52 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          fetch-depth: 0
+          node-version: ${{ matrix.node-version }}
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: "npm"
+      - name: Install dependencies
+        working-directory: apps/api
+        run: yarn install
 
-      - name: Set Nx SHAs
-        uses: nrwl/nx-set-shas@v4
+      # - name: Build
+      #   working-directory: apps/api
+      #   run: yarn build
 
-      - name: Install Nest CLI
-        run: npm install -g @nestjs/cli
 
-      - name: Check Nx version
-        run: npx nx --version
+      # - uses: actions/checkout@v4
+      #   with:
+      #     fetch-depth: 0
 
-      - name: Check Node.js version
-        run: node --version
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 20
+      #     cache: "npm"
 
-      - name: Check npm version
-        run: npm --version
+      # - name: Set Nx SHAs
+      #   uses: nrwl/nx-set-shas@v4
 
-      - name: Check Nest version
-        run: nest --version
+      # - name: Install Nest CLI
+      #   run: npm install -g @nestjs/cli
 
-      - name: Install the dependencies
-        run: npm install --include=optional
+      # - name: Check Nx version
+      #   run: npx nx --version
 
-      # - name: Run Nx affected commands
-      #   run: npx nx affected --base=main --head=HEAD -t build
+      # - name: Check Node.js version
+      #   run: node --version
+
+      # - name: Check npm version
+      #   run: npm --version
+
+      # - name: Check Nest version
+      #   run: nest --version
+
+      # - name: Install the dependencies
+      #   run: npm install --include=optional
 
       - name: Build
-        run: npx nx run api:build
+        run: yarn run nx run api:build

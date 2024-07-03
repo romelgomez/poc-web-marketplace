@@ -1,5 +1,5 @@
 {
-  "name": "@maryline/source",
+  "name": "@maryline/api",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
