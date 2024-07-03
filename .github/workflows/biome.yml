@@ -1,4 +1,4 @@
-name: API v2 CI
+name: Biome CI
 
 on:
   push:
@@ -26,13 +26,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm i --include=optional
+        working-directory: apps/api
+        run: npm install
 
-      # - name: Install Nest CLI
-      #   run: npm install -g @nestjs/cli
+      - name: Install Biome
+        run: npm install -g biome
 
-      # - name: Check Nest version
-      #   run: nest --version
-
-      - name: Build
-        run: npx nx run api:build --verbose
+      - name: Biome checks
+        working-directory: apps/api
+        run: biome format --write . && biome lint --write . && biome check --write .
