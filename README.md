@@ -78,13 +78,17 @@ It will show tasks that you can run with Nx.
 
 ## project notes 
 
+## nx
+
+- `npx nx affected --base=main --head=HEAD -t build` to check the affected
+
 
 ### api
 
-- `npx nx affected --base=main --head=HEAD -t build` to check the affected
 - `nx show project api` to show the commands 
 - `nx run api:start:dev` to run the api
 
 ### web 
 
-- `nx run web:dev ` to run the web
+- `nx show project web` to show the commands 
+- `nx run web:dev` to run the web
