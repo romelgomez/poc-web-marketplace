@@ -25,8 +25,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install Nest CLI
+        run: npm install -g @nestjs/cli
+
       - name: Install dependencies
-        run: npm i
+        run: npm ic --include=optional
+
+      - name: Check Nest version
+        run: nest --version
+
+
+
 
       # - name: Install Biome
       #   run: npm install -g biome
@@ -35,4 +44,4 @@ jobs:
       #   run: biome format --write . && biome lint --write . && biome check --write .
 
       - name: Build
-        run: npx nx run api:build
+        run: npx nx run api:build --verbose
