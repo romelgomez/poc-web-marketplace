@@ -34,3 +34,6 @@ jobs:
       - name: Build
         working-directory: apps/api
         run: npm run build
+
+      - name: Build with npx
+        run: npx nx run api:build
