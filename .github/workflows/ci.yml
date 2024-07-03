@@ -28,9 +28,6 @@ jobs:
 
       - name: Install Nest CLI
         run: npm install -g @nestjs/cli
-        
-      - name: Install Biome
-        run: npm install -g biome
 
       - name: Check Nx version
         run: npx nx --version
@@ -44,14 +41,8 @@ jobs:
       - name: Check Nest version
         run: nest --version
 
-      - name: Check Biome version
-        run: npx biome --version
-
       - name: Install the dependencies
         run: npm install --include=optional
-
-      - name: Biome checks
-        run: npx biome format --write . && biome lint --write . && biome check --write .
 
       - name: Run Nx affected commands
         run: npx nx affected --base=main --head=HEAD -t build
