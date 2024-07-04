@@ -76,25 +76,33 @@ It will show tasks that you can run with Nx.
 - [Follow us on Twitter](https://twitter.com/nxdevtools)
 
 
-## project notes 
-
-## nx
-
-- `npx nx affected --base=main --head=HEAD -t build` to check the affected
+## Maryline Notes 
 
 
-### api
+### Check the affected
 
-
+```bash
+npx nx affected --base=main --head=HEAD -t build
 ```
+
+### Build All Projects:
+
+```bash
+nx run-many --target=build --all
+```
+
+### API
+
+
+```bash
 npx nx build api
 npx nx serve api
 nx show project api --web
 ```
 
-### web 
+### Web client
 
-```
+```bash
 nx run web:next:build
 nx run web:next:dev
 nx run web:next:start
@@ -102,30 +110,25 @@ nx run web:serve-static
 nx show project web --web
 ```
 
-### web 2
+
+### Biome formating & lint & check
+
+```bash
+npx biome format --write . && biome lint --write . && biome check --write .
+
+
+npx biome format --write .
+npx biome lint --write .
+npx biome format --write .
 ```
-nx run web2:next:build
-nx run web2:next:dev
-nx run web2:next:start
-nx run web2:serve-static
-```
 
-## biome formating & lint & check
 
-- `npx biome format --write .`
-
-- `npx biome lint --write .`
-
-- `npx biome format --write .`
-
-- `npx biome format --write . && biome lint --write . && biome check --write .`
-
-## @nx setting in a existing project a mono repo
+### NX how to setting in a existing project a mono repo
 
 
 NextJS
 
-```
+```bash
 nx add @nx/next 
 nx g @nx/next:app apps/web
 nx dev web
@@ -133,7 +136,7 @@ nx dev web
 
 NestJS
 
-```
+```bash
 nx add @nx/nest  
 nx g @nx/nest:app apps/api2  
 nx serve api2

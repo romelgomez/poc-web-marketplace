@@ -1,38 +1,38 @@
-# name: Database CI
+name: Database CI
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-# jobs:
-#   migrations:
-#     runs-on: ubuntu-latest
+jobs:
+  migrations:
+    runs-on: ubuntu-latest
 
-#     services:
-#       postgres:
-#         image: postgres:13-alpine
-#         env:
-#           POSTGRES_DB: mydatabase
-#           POSTGRES_USER: myuser
-#           POSTGRES_PASSWORD: mypassword
-#         ports:
-#           - 5432:5432
-#         options: >-
-#           --health-cmd pg_isready
-#           --health-interval 10s
-#           --health-timeout 5s
-#           --health-retries 5
+    services:
+      postgres:
+        image: postgres:13-alpine
+        env:
+          POSTGRES_DB: mydatabase
+          POSTGRES_USER: myuser
+          POSTGRES_PASSWORD: mypassword
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#       - name: Install dependencies
-#         run: yarn install
+      - name: Install dependencies
+        run: npm i
 
-#       - name: Run migrations
-#         run: yarn nx migrate --run --all
+      - name: Run migrations
+        run: npx nx migrate --run --all
