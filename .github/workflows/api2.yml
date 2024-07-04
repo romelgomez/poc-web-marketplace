@@ -1,4 +1,4 @@
-name: API CI
+name: API 2 CI
 
 on:
   push:
@@ -31,4 +31,4 @@ jobs:
         run: npm install
 
       - name: Build with npx
-        run: npx nx build api
+        run: npx nx build api2

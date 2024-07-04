@@ -74,3 +74,70 @@ It will show tasks that you can run with Nx.
 - [Join the community](https://nx.dev/community)
 - [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
 - [Follow us on Twitter](https://twitter.com/nxdevtools)
+
+
+## project notes 
+
+## nx
+
+- `npx nx affected --base=main --head=HEAD -t build` to check the affected
+
+
+### api
+
+
+```
+npx nx build api
+npx nx serve api
+nx show project api --web
+```
+
+### web 
+
+```
+nx run web:next:build
+nx run web:next:dev
+nx run web:next:start
+nx run web:serve-static
+nx show project web --web
+```
+
+### web 2
+```
+nx run web2:next:build
+nx run web2:next:dev
+nx run web2:next:start
+nx run web2:serve-static
+```
+
+## biome formating & lint & check
+
+- `npx biome format --write .`
+
+- `npx biome lint --write .`
+
+- `npx biome format --write .`
+
+- `npx biome format --write . && biome lint --write . && biome check --write .`
+
+## @nx setting in a existing project a mono repo
+
+
+NextJS
+
+```
+nx add @nx/next 
+nx g @nx/next:app apps/web
+nx dev web
+```
+
+NestJS
+
+```
+nx add @nx/nest  
+nx g @nx/nest:app apps/api2  
+nx serve api2
+nx show project api2-e2e --web
+nx show project api2 --web
+npx nx build api2
+```

@@ -1,4 +1,4 @@
-name: WEB CI
+name: WEB 2 CI
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
         run: npm i
 
       - name: Build
-        run: npx nx run web:next:build
+        run: npx nx run web2:next:build
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}

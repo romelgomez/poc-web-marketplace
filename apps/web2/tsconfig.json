@@ -23,8 +23,8 @@
     "**/*.tsx",
     "**/*.js",
     "**/*.jsx",
-    "../../apps/web/.next/types/**/*.ts",
-    "../../dist/apps/web/.next/types/**/*.ts",
+    "../../apps/web2/.next/types/**/*.ts",
+    "../../dist/apps/web2/.next/types/**/*.ts",
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],
