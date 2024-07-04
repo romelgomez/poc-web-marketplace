@@ -85,23 +85,21 @@ It will show tasks that you can run with Nx.
 
 ### api
 
-<!-- - `nx show project api` to show the commands  -->
-<!-- - `nx run api:start:dev` to run the api -->
 
-- `npx nx build api` to build the api
-- `npx nx serve api` to run the api
-
+```
+npx nx build api
+npx nx serve api
+nx show project api --web
+```
 
 ### web 
-
-<!-- - `nx show project web` to show the commands 
-- `nx run web:dev` to run the web -->
 
 ```
 nx run web:next:build
 nx run web:next:dev
 nx run web:next:start
 nx run web:serve-static
+nx show project web --web
 ```
 
 ### web 2

@@ -6,7 +6,5 @@
     "types": ["jest", "node"],
     "jsx": "react"
   },
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "include": ["src/**/*.d.ts"]
 }
