@@ -1,0 +1,21 @@
+node_modules
+# dist
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.vscode
+.next
+nx.json
+tsconfig.base.json
+# package-lock.json
+README.md
+docker-compose.yml
+*.log
+*.md
+.env
+.env.example
+.env.local
+.env.local.example
+scripts
+.DS_Store

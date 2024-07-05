@@ -96,6 +96,7 @@ nx run-many --target=build --all
 
 ```bash
 npx nx build api
+npx nx build api  --configuration=production
 npx nx serve api
 nx show project api --web
 ```
@@ -103,6 +104,9 @@ nx show project api --web
 ### Web client
 
 ```bash
+npx nx build web
+
+
 nx run web:next:build
 nx run web:next:dev
 nx run web:next:start

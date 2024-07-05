@@ -37,7 +37,7 @@ import { UserModule } from './modules/users/user.module';
       driver: ApolloDriver,
       useFactory: async () => ({
         driver: ApolloDriver,
-        autoSchemaFile: join(process.cwd(), 'prisma/api/schema.gql'),
+        autoSchemaFile: join(process.cwd(), 'prisma/schema.gql'),
         faviconUrl: '',
       }),
     }),
