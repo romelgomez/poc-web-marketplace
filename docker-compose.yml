@@ -1,4 +1,6 @@
-# docker-compose up --build
+# Removing the volumes to reset the PostgreSQL database state: 
+# - docker-compose down -v 
+# - docker-compose up --build
 
 services:
   api:
@@ -6,14 +8,12 @@ services:
       context: .
       dockerfile: apps/api/Dockerfile
     ports:
-      - '3001:3000'
+      - '3001:3001'
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       PORT: 3001
       GOOGLE_CALLBACK_URL: http://localhost:3001/api/auth/google/redirect
-      # TODO: DELETE
-      # DATABASE_URL: postgresql://developer:developer@localhost:5432/chevere?schema=public
-      DATABASE_HOST: localhost
+      DATABASE_HOST: postgres
       DATABASE_PORT: 5432
       DATABASE_USER: developer
       DATABASE_NAME: chevere
@@ -28,6 +28,31 @@ services:
       - AT_SECRET
       - RT_SECRET
       - MEILI_KEY
+
+  meilisearch:
+    image: getmeili/meilisearch:v0.28.1
+    ports:
+      - '7700:7700'
+    volumes:
+      - meili_data:/meili_data
+
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_DB: chevere
+      POSTGRES_PASSWORD: /run/secrets/DATABASE_PASSWORD
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    secrets:
+      - DATABASE_PASSWORD
+
+volumes:
+  meili_data:
+  postgres_data:
+
 
 secrets:
   GOOGLE_CLIENT_ID:
