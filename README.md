@@ -148,3 +148,25 @@ nx show project api2-e2e --web
 nx show project api2 --web
 npx nx build api2
 ```
+
+
+
+project-root/
+│
+├── docker-compose.yml
+├── .env
+├── secrets/
+│   ├── GOOGLE_CLIENT_ID
+│   ├── GOOGLE_CLIENT_SECRET
+│   ├── DATABASE_PASSWORD
+│   ├── JWT_SECRET
+│   ├── JWT_EXPIRATION_TIME
+│   ├── AT_SECRET
+│   ├── RT_SECRET
+│   ├── MEILI_KEY
+├── certbot/
+│   ├── conf/
+│   ├── www/
+└── app/
+    ├── dist/
+    └── nginx.conf

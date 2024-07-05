@@ -2,6 +2,8 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { ConfigService } from '@nestjs/config';
 import type { EnvironmentConfig } from './config.types';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import {
   DatabaseTypeEnum,
@@ -51,8 +53,12 @@ export class AppConfigService {
   }
 
   public getEnvVal(key: ProcessEnvEnum): string {
-    const value = this.config.get<string>(key);
+    const secretPath = join('/run/secrets', key);
+    if (existsSync(secretPath)) {
+      return readFileSync(secretPath, 'utf8').trim();
+    }
 
+    const value = this.config.get<string>(key);
     if (!value) {
       throw new BadRequestException(
         `Environment variable ${key} is not defined`,

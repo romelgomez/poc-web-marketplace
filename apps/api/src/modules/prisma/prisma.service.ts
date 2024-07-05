@@ -21,7 +21,16 @@ export class PrismaService
       ProcessEnvEnum.DATABASE_NAME,
     );
 
+    
+    
+
     const databaseUrl = `postgresql://${user}:${password}@${host}:${port}/${databaseName}?schema=public`;
+
+    // TODO delete
+    console.log(`\n\n ..:: databaseUrl ::.. \n\n`);
+    console.log({databaseUrl});
+    console.log(`\n\n<----\n\n`);
+
 
     super({
       datasources: {

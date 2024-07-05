@@ -1,43 +1,43 @@
-name: Database CI
+# name: Database CI
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
+#   pull_request:
+#     branches:
+#       - main
 
-jobs:
-  migrations:
-    runs-on: ubuntu-latest
+# jobs:
+#   migrations:
+#     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:13-alpine
-        env:
-          POSTGRES_DB: mydatabase
-          POSTGRES_USER: myuser
-          POSTGRES_PASSWORD: mypassword
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+#     services:
+#       postgres:
+#         image: postgres:13-alpine
+#         env:
+#           POSTGRES_DB: mydatabase
+#           POSTGRES_USER: myuser
+#           POSTGRES_PASSWORD: mypassword
+#         ports:
+#           - 5432:5432
+#         options: >-
+#           --health-cmd pg_isready
+#           --health-interval 10s
+#           --health-timeout 5s
+#           --health-retries 5
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm install
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Set up Prisma
-        run: npx prisma generate
+#       - name: Set up Prisma
+#         run: npx prisma generate
 
-      - name: Run database migrations
-        env:
-          DATABASE_URL: postgres://myuser:mypassword@localhost:5432/mydatabase
-        run: npx prisma migrate deploy
+#       - name: Run database migrations
+#         env:
+#           DATABASE_URL: postgres://myuser:mypassword@localhost:5432/mydatabase
+#         run: npx prisma migrate deploy
