@@ -1,5 +1,4 @@
 node_modules
-# dist
 Dockerfile
 .dockerignore
 .git
@@ -8,7 +7,6 @@ Dockerfile
 .next
 nx.json
 tsconfig.base.json
-# package-lock.json
 README.md
 docker-compose.yml
 *.log

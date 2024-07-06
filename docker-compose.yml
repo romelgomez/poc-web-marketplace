@@ -1,8 +1,23 @@
 # Removing the volumes to reset the PostgreSQL database state: 
 # - docker-compose down -v 
 # - docker-compose up --build
+# Check Network Connectivity, Access the api service container and 
+# test connectivity to the PostgreSQL service:
+# - nc -zv postgres 5432
+
 
 services:
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_DB: chevere
+      POSTGRES_PASSWORD: developer
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   api:
     build:
       context: .
@@ -19,6 +34,10 @@ services:
       DATABASE_NAME: chevere
       CLERK_ISSUER_URL: https://hardy-weasel-66.clerk.accounts.dev
       MEILI_HOST: http://meilisearch:7700
+      DATABASE_PASSWORD: developer
+      DATABASE_URL: postgres://developer:developer@postgres:5432/chevere?schema=public
+    depends_on:
+      - postgres
     secrets:
       - GOOGLE_CLIENT_ID
       - GOOGLE_CLIENT_SECRET
@@ -29,30 +48,8 @@ services:
       - RT_SECRET
       - MEILI_KEY
 
-  meilisearch:
-    image: getmeili/meilisearch:v0.28.1
-    ports:
-      - '7700:7700'
-    volumes:
-      - meili_data:/meili_data
-
-  postgres:
-    image: postgres:13-alpine
-    environment:
-      POSTGRES_USER: developer
-      POSTGRES_DB: chevere
-      POSTGRES_PASSWORD: /run/secrets/DATABASE_PASSWORD
-    ports:
-      - '5432:5432'
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    secrets:
-      - DATABASE_PASSWORD
-
 volumes:
-  meili_data:
   postgres_data:
-
 
 secrets:
   GOOGLE_CLIENT_ID:
@@ -74,35 +71,48 @@ secrets:
 
 
 
+
+
 # services:
+#   postgres:
+#     image: postgres:13-alpine
+#     environment:
+#       POSTGRES_USER: developer
+#       POSTGRES_DB: chevere
+#       # POSTGRES_PASSWORD: /run/secrets/DATABASE_PASSWORD
+#       POSTGRES_PASSWORD: developer
+#     ports:
+#       - '5432:5432'
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     # secrets:
+#     #   - DATABASE_PASSWORD
+
 #   api:
 #     build:
 #       context: .
-#       dockerfile: apps/web/Dockerfile
+#       dockerfile: apps/api/Dockerfile
 #     ports:
-#       - '3001:3000'
-
-
-#     restart: always
-#     # ports:
-#     #   - "80:80"
-#     #   - "443:443"
-#     # volumes:
-#     #   - ./dist:/app/dist
-#     #   - ./nginx.conf:/etc/nginx/nginx.conf
-#       # - ./certbot/conf:/etc/letsencrypt
-#       # - ./certbot/www:/var/www/certbot
+#       - '3001:3001'
 #     environment:
-#       NODE_ENV: production
+#       NODE_ENV: development
 #       PORT: 3001
 #       GOOGLE_CALLBACK_URL: http://localhost:3001/api/auth/google/redirect
-#       DATABASE_URL: postgresql://developer:dummy_password@localhost:5432/chevere?schema=public
-#       DATABASE_HOST: localhost
+#       DATABASE_HOST: postgres
 #       DATABASE_PORT: 5432
 #       DATABASE_USER: developer
 #       DATABASE_NAME: chevere
 #       CLERK_ISSUER_URL: https://hardy-weasel-66.clerk.accounts.dev
-#       MEILISEARCH_URL: http://meilisearch:7700
+#       MEILI_HOST: http://meilisearch:7700
+#       DATABASE_PASSWORD: developer
+#       # DATABASE_URL: postgres://developer:$(< /run/secrets/DATABASE_PASSWORD)@5432/chevere?schema=public
+#       DATABASE_URL: postgres://developer:developer@5432:5432/chevere?schema=public
+#     depends_on:
+#       # - api
+#       # - meilisearch
+#       - postgres
+      
+
 #     secrets:
 #       - GOOGLE_CLIENT_ID
 #       - GOOGLE_CLIENT_SECRET
@@ -113,12 +123,34 @@ secrets:
 #       - RT_SECRET
 #       - MEILI_KEY
 
-#   # certbot:
-#   #   image: certbot/certbot
+#   # web:
+#   #   build:
+#   #     context: .
+#   #     dockerfile: apps/web/Dockerfile
+#   #   ports:
+#   #     - '3000:3000'
+#   #   environment:
+#   #     - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+#   #   depends_on:
+#   #     - api
+#   #     - meilisearch
+#   #     - postgres
+#   #   secrets:
+#   #     - CLERK_SECRET_KEY
+
+
+#   # meilisearch:
+#   #   image: getmeili/meilisearch:v0.28.1
+#   #   ports:
+#   #     - '7700:7700'
 #   #   volumes:
-#   #     - ./certbot/conf:/etc/letsencrypt
-#   #     - ./certbot/www:/var/www/certbot
-#   #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+#   #     - meili_data:/meili_data
+
+
+# volumes:
+#   # meili_data:
+#   postgres_data:
+
 
 # secrets:
 #   GOOGLE_CLIENT_ID:
@@ -137,86 +169,3 @@ secrets:
 #     file: ./secrets/RT_SECRET
 #   MEILI_KEY:
 #     file: ./secrets/MEILI_KEY
-
-
-
-
-
-
-
-
-
-
-# services:
-#   api:
-#     build: .
-#     restart: always
-#     ports:
-#       - "80:80"
-#       - "443:443"
-#     volumes:
-#       - ./dist:/app/dist
-#       - ./nginx.conf:/etc/nginx/nginx.conf
-#       - ./certbot/conf:/etc/letsencrypt
-#       - ./certbot/www:/var/www/certbot
-#     environment:
-#       - NODE_ENV=production
-
-#   certbot:
-#     image: certbot/certbot
-#     volumes:
-#       - ./certbot/conf:/etc/letsencrypt
-#       - ./certbot/www:/var/www/certbot
-#     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-
-
-
-# services:
-  # web:
-  #   build:
-  #     context: .
-  #     dockerfile: apps/web/Dockerfile
-  #   ports:
-  #     - '3000:3000'
-  #   # environment:
-  #   #   - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-  #   #   - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
-  #   # depends_on:
-  #   #   - api
-  #   #   - meilisearch
-  #   #   - postgres
-
-  # api:
-  #   build:
-  #     context: .
-  #     dockerfile: apps/api/Dockerfile
-  #   ports:
-  #     - '3001:3000'
-    # environment:
-    #   - DATABASE_URL=postgres://myuser:mypassword@postgres:5432/mydatabase
-    #   - MEILISEARCH_URL=http://meilisearch:7700
-    # depends_on:
-    #   - postgres
-    #   - meilisearch
-
-#   meilisearch:
-#     image: getmeili/meilisearch:v0.28.1
-#     ports:
-#       - '7700:7700'
-#     volumes:
-#       - meili_data:/meili_data
-
-#   postgres:
-#     image: postgres:13-alpine
-#     environment:
-#       POSTGRES_DB: mydatabase
-#       POSTGRES_USER: myuser
-#       POSTGRES_PASSWORD: mypassword
-#     ports:
-#       - '5432:5432'
-#     volumes:
-#       - postgres_data:/var/lib/postgresql/data
-
-# volumes:
-#   meili_data:
-#   postgres_data:

@@ -149,9 +149,9 @@ nx show project api2 --web
 npx nx build api2
 ```
 
+### Secrets structure pickup by docker-compose.yml
 
-
-project-root/
+maryline/
 │
 ├── docker-compose.yml
 ├── .env
@@ -164,9 +164,10 @@ project-root/
 │   ├── AT_SECRET
 │   ├── RT_SECRET
 │   ├── MEILI_KEY
-├── certbot/
-│   ├── conf/
-│   ├── www/
-└── app/
-    ├── dist/
-    └── nginx.conf
+│   ├── CLERK_SECRET_KEY
+
+### To play with docker
+
+```bash
+psql -U developer -d chevere -h localhost
+```

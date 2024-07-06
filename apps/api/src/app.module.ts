@@ -40,7 +40,6 @@ import { UserModule } from './modules/users/user.module';
         autoSchemaFile: join(process.cwd(), 'prisma/schema.gql'),
         faviconUrl: '',
 
-
         // TODO: to check out with docker
         // playground: true, // Ensure this is true for local development
         // introspection: true, // Enable introspection for schema
@@ -50,7 +49,6 @@ import { UserModule } from './modules/users/user.module';
         // },
         // context: ({ req }) => ({ req }),
         // csrfPrevention: false, // Disable CSRF prevention for local development
- 
       }),
     }),
 

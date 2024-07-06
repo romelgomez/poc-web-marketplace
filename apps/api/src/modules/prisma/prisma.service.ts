@@ -23,6 +23,14 @@ export class PrismaService
 
     const databaseUrl = `postgresql://${user}:${password}@${host}:${port}/${databaseName}?schema=public`;
 
+    
+    console.log(`\n\n ..:: databaseUrl ::.. \n\n`);
+    console.log({
+      databaseUrl
+    });
+    console.log(`\n\n<----\n\n`);
+    
+
     super({
       datasources: {
         db: {

@@ -22,10 +22,9 @@ async function bootstrap() {
   // https://github.com/graphql/graphql-playground/issues/1283
   app.use(
     helmet({
-      contentSecurityPolicy: process.env.NODE_ENV === 'production'
+      contentSecurityPolicy: process.env.NODE_ENV === 'production',
 
-
-     // TODO: to check out with docker
+      // TODO: to check out with docker
       // contentSecurityPolicy: {
       //   directives: {
       //     defaultSrc: ["'self'"],
