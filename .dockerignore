@@ -1,3 +1,4 @@
+# ..:: dockerignore
 node_modules
 Dockerfile
 .dockerignore
@@ -5,8 +6,6 @@ Dockerfile
 .gitignore
 .vscode
 .next
-nx.json
-tsconfig.base.json
 README.md
 docker-compose.yml
 *.log

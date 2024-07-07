@@ -1,0 +1,29 @@
+# docker-compose down -v
+# docker build --progress=plain --no-cache -t api -f apps/api/Dockerfile.dev .
+# docker-compose -f docker-compose-dev.yml up
+
+services:
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile.dev
+    environment:
+      DATABASE_URL: "postgresql://user:password@db:5432/mydatabase"
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:
