@@ -1,0 +1,77 @@
+# docker-compose down -v
+# docker build --progress=plain --no-cache -t dev-api -f apps/api/Dockerfile.dev .
+# docker-compose -f docker-compose-dev.yml up
+
+# psql -U user -d mydatabase
+# \dt
+
+services:
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile.dev
+    environment:
+      NODE_ENV: development
+      # PORT: 3001
+      # GOOGLE_CALLBACK_URL: http://localhost:3001/api/auth/google/redirect
+      # DATABASE_URL: postgres://developer:developer@postgres:5432/chevere?schema=public
+      # DATABASE_URL: DATABASE_URL=postgresql://user:password@db:5432/mydatabase
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USER: user
+      DATABASE_NAME: mydatabase
+      CLERK_ISSUER_URL: https://hardy-weasel-66.clerk.accounts.dev
+      MEILI_HOST: http://meilisearch:7700
+      DATABASE_PASSWORD: password
+      DATABASE_URL : postgresql://user:password@db:5432/mydatabase
+
+
+# export DATABASE_URL=postgres://user:password@db:5432/mydatabase
+
+    # secrets:
+    #   - GOOGLE_CLIENT_ID
+    #   - GOOGLE_CLIENT_SECRET
+    #   - DATABASE_PASSWORD
+    #   - JWT_SECRET
+    #   - JWT_EXPIRATION_TIME
+    #   - AT_SECRET
+    #   - RT_SECRET
+    #   - MEILI_KEY
+
+
+    # depends_on:
+    #   - db
+    # ports:
+    #   - "3000:3000"
+
+volumes:
+  pgdata:
+
+# secrets:
+#   GOOGLE_CLIENT_ID:
+#     file: ./secrets/GOOGLE_CLIENT_ID
+#   GOOGLE_CLIENT_SECRET:
+#     file: ./secrets/GOOGLE_CLIENT_SECRET
+#   DATABASE_PASSWORD:
+#     file: ./secrets/DATABASE_PASSWORD
+#   JWT_SECRET:
+#     file: ./secrets/JWT_SECRET
+#   JWT_EXPIRATION_TIME:
+#     file: ./secrets/JWT_EXPIRATION_TIME
+#   AT_SECRET:
+#     file: ./secrets/AT_SECRET
+#   RT_SECRET:
+#     file: ./secrets/RT_SECRET
+#   MEILI_KEY:
+#     file: ./secrets/MEILI_KEY
