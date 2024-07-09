@@ -5,7 +5,8 @@
   "scripts": {
     "prisma-debug": "nx run api:prisma-debug --verbose",
     "start:migrated": "prisma generate && npx prisma migrate dev --name init && npx prisma migrate deploy && node dist/main.js",
-    "start:red": "npx prisma generate && npx prisma migrate dev --name init && npx prisma migrate deploy && node dist/apps/api/main.js"
+    "start:red": "npx prisma generate && npx prisma migrate dev --name init && npx prisma migrate deploy && node dist/apps/api/main.js",
+    "start:blue": "npx prisma generate && npx prisma migrate dev --name init && npx prisma migrate deploy && node dist/apps/api/main.js"
   },
   "private": true,
   "dependencies": {

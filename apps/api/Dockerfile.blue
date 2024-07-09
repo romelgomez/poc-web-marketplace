@@ -1,26 +1,28 @@
-# docker-compose down -v
-# docker build --progress=plain --no-cache -t api-dev -f apps/api/Dockerfile.dev .
-# docker-compose -f docker-compose-dev.yml up
+# Use a consistent base image for both stages to improve layer sharing
+FROM node:18-alpine AS base
 
-# Stage 1: Build the application
-FROM node:18-alpine AS build
-
+# Set the working directory for future commands
 WORKDIR /app
 
-ADD package*.json .
-ADD apps/api/prisma/schema.prisma ./prisma/
+# Stage 1: Build the application
+FROM base AS build
 
+# Install dependencies separately to cache layer if package.json didn't change
+COPY package*.json ./
+COPY apps/api/prisma/schema.prisma ./prisma/
 RUN npm install
 
+# Copy prisma schema and other files needed for build
 COPY . .
 
 # Build the application
-# RUN npx nx build api --configuration=production
-RUN npx nx build api --configuration=development
+RUN npx prisma generate
+RUN npx nx build api
 
 # Stage 2: Setup the application
-FROM node:18-alpine
+FROM base AS runtime
 
+# Set the working directory
 WORKDIR /app
 
 # Copy built application and dependencies from the build stage
@@ -33,5 +35,5 @@ COPY --from=build /app/nx.json /app
 # Expose the port the app runs on
 EXPOSE 3000
 
-# CMD ["npm", "run", "start:migrate:prod"]
-CMD ["npm", "run", "start:migrate"]
+# Set the command to run the application
+CMD ["npm", "run", "start:blue"]
