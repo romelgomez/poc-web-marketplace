@@ -37,8 +37,7 @@
   "generators": {
     "@nx/next": {
       "application": {
-        "style": "scss",
-        "linter": "biome"
+        "style": "scss"
       }
     }
   },
