@@ -151,6 +151,7 @@ npx nx build api2
 
 ### Secrets structure pickup by docker-compose.yml
 
+```bash
 maryline/
 │
 ├── docker-compose.yml
@@ -165,6 +166,7 @@ maryline/
 │   ├── RT_SECRET
 │   ├── MEILI_KEY
 │   ├── CLERK_SECRET_KEY
+```
 
 ### To play with docker
 
