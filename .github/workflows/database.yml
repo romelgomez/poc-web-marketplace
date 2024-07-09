@@ -45,5 +45,9 @@ jobs:
 
       - name: Verify migration
         run: |
-          npx prisma db pull
-          npx prisma validate
+          npx prisma db pull --schema apps/api/prisma/schema.prisma
+          npx prisma validate --schema apps/api/prisma/schema.prisma
+
+      - name: Log database schema
+        run: |
+          psql $DATABASE_URL -c '\d+'
