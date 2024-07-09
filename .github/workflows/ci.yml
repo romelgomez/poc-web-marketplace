@@ -24,14 +24,14 @@ jobs:
           node-version: 20
           cache: "npm"
 
-      - name: Set Nx SHAs
-        uses: nrwl/nx-set-shas@v4
+      # - name: Set Nx SHAs
+      #   uses: nrwl/nx-set-shas@v4
 
       - name: Install Nest CLI
         run: npm install -g @nestjs/cli
 
-      - name: Check Nx version
-        run: npx nx --version
+      # - name: Check Nx version
+      #   run: npx nx --version
 
       - name: Check Node.js version
         run: node --version
@@ -45,5 +45,5 @@ jobs:
       - name: Install the dependencies
         run: npm install --include=optional
 
-      - name: Run Nx affected commands
-        run: npx nx affected -t build
+      # - name: Run Nx affected commands
+        # run: npx nx affected -t build
