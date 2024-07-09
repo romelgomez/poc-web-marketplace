@@ -1,0 +1,49 @@
+# :: test steps ::
+# 
+# 1. npx nx build api  --configuration=production
+#
+# 2. docker-compose down -v
+#
+# 3. docker build --progress=plain --no-cache -t maryline/web:0.0.1 -f apps/web/Dockerfile.web.white .
+# 
+# 3. docker-compose up --build
+#
+
+
+# Stage 1: Build
+FROM node:18-alpine AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy the dependency files
+COPY package*.json  ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy the rest of the codebase
+COPY . .
+
+# Build the Next.js app
+RUN npx nx run web:next:build
+
+# Stage 2: Production Image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install serve - a static file serving package
+# RUN npm install -g serve
+
+# Copy built files from the previous stage
+# COPY --from=builder /app/dist/apps/web ./dist
+# COPY --from=build /app/dist/apps/api /app/dist/apps/api
+# 
+
+# Expose the port the app runs on
+# EXPOSE 3000
+
+# Start the Next.js app
+# CMD ["node", "dist/apps/web"]
