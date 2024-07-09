@@ -31,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Generates the Prisma Client based schema definition in schema.prisma
-        run: npx prisma generate
+        run: npx prisma generate --schema apps/api/prisma/schema.prisma
 
       - name: Build with npx
         run: npx nx build api
