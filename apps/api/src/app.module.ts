@@ -37,8 +37,18 @@ import { UserModule } from './modules/users/user.module';
       driver: ApolloDriver,
       useFactory: async () => ({
         driver: ApolloDriver,
-        autoSchemaFile: join(process.cwd(), 'prisma/api/schema.gql'),
+        autoSchemaFile: join(process.cwd(), 'prisma/schema.gql'),
         faviconUrl: '',
+
+        // TODO: to check out with docker
+        // playground: true, // Ensure this is true for local development
+        // introspection: true, // Enable introspection for schema
+        // cors: {
+        //   origin: '*', // Adjust as needed for your environment
+        //   credentials: true,
+        // },
+        // context: ({ req }) => ({ req }),
+        // csrfPrevention: false, // Disable CSRF prevention for local development
       }),
     }),
 

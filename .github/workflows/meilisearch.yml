@@ -14,7 +14,7 @@
 
 #     services:
 #       meilisearch:
-#         image: getmeili/meilisearch:v0.28.1
+#         image: getmeili/meilisearch:v1.9
 #         ports:
 #           - 7700:7700
 #         options: >-
@@ -37,18 +37,5 @@
 #           node-version: ${{ matrix.node-version }}
 
 #       - name: Install dependencies
-#         run: yarn install
+#         run: npm i
 
-#       - name: Run tests
-#         run: yarn test
-
-# services:
-#   meilisearch:
-#     image: getmeili/meilisearch:v0.28.1
-#     ports:
-#       - 7700:7700
-#     options: >-
-#       --health-cmd "curl http://localhost:7700/health | grep -q '\"status\":\"available\"'"
-#       --health-interval 10s
-#       --health-timeout 5s
-#       --health-retries 5

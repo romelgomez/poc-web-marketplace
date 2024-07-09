@@ -22,8 +22,19 @@ async function bootstrap() {
   // https://github.com/graphql/graphql-playground/issues/1283
   app.use(
     helmet({
-      contentSecurityPolicy:
-        process.env.NODE_ENV === 'production' ? undefined : false,
+      contentSecurityPolicy: process.env.NODE_ENV === 'production',
+
+      // TODO: to check out with docker
+      // contentSecurityPolicy: {
+      //   directives: {
+      //     defaultSrc: ["'self'"],
+      //     scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "cdn.jsdelivr.net"],
+      //     styleSrc: ["'self'", "'unsafe-inline'", "cdn.jsdelivr.net"],
+      //     imgSrc: ["'self'", "data:", "cdn.jsdelivr.net"],
+      //     connectSrc: ["'self'", "https://hardy-weasel-66.clerk.accounts.dev"],
+      //     // add other directives as needed
+      //   },
+      // },
     }),
   );
 
