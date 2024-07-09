@@ -27,6 +27,9 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+    env:
+      DATABASE_URL: postgres://myuser:mypassword@localhost:5432/mydatabase
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -34,10 +37,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Generates the Prisma Client based schema definition in schema.prisma
+      - name: Generate Prisma Client based on schema.prisma
         run: npx prisma generate --schema apps/api/prisma/schema.prisma
 
       - name: Run database migrations
-        env:
-          DATABASE_URL: postgres://myuser:mypassword@localhost:5432/mydatabase
         run: npx prisma migrate deploy
+
+      - name: Verify migration
+        run: |
+          npx prisma db pull
+          npx prisma validate
