@@ -30,5 +30,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Generates the Prisma Client based schema definition in schema.prisma
+        run: npx prisma generate
+
       - name: Build with npx
         run: npx nx build api
