@@ -41,7 +41,7 @@ jobs:
         run: npx prisma generate --schema apps/api/prisma/schema.prisma
 
       - name: Run database migrations
-        run: npx prisma migrate dev --name init
+        run: npx prisma migrate dev --name init --schema apps/api/prisma/schema.prisma
 
       - name: Verify migration
         run: |
