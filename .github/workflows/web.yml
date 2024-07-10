@@ -30,7 +30,7 @@ jobs:
         run: npm i
 
       - name: Build
-        run: npx nx run web:next:build
+        run: npx nx build web
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
           CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
