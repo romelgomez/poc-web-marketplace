@@ -1,26 +1,46 @@
-FROM node:20-alpine
-RUN ls -la .
-# WORKDIR /app
+# :: test steps ::
+# 
+# 1. npx nx build api  --configuration=production
+#
+# 2. docker-compose down -v
+#
+# 3. docker build --progress=plain --no-cache -t maryline/web:0.0.1 -f apps/web/Dockerfile .
+# 
+# 3. docker-compose up --build
+#
 
-# # Move to the root directory of the monorepo to copy the root package.json and package-lock.json
-# WORKDIR /maryline
-# COPY package.json package-lock.json ./
+# Stage 1: Build
+FROM node:18-alpine AS builder
 
-# # Debug: List the contents of /maryline
-# RUN ls -la /maryline
+# Set working directory
+WORKDIR /app
 
-# # Install dependencies from the root package.json
-# RUN npm install --legacy-peer-deps
+# Copy the dependency files
+COPY package*.json ./
 
-# # Copy the web project files to the working directory /app
-# WORKDIR /app
-# COPY . .
+# Install dependencies
+RUN npm ci
 
-# # Debug: List the contents of /app after copying project files
-# RUN ls -la /app
+# Copy the rest of the codebase
+COPY . .
 
-# # Build the web project
-# RUN npm run build --prefix /maryline
+# Build the Next.js app
+RUN npx nx build web --configuration=production
 
-# EXPOSE 3000
-# CMD ["npm", "start"]
+# Stage 2: Serve
+FROM node:18-alpine AS runner
+
+# Set working directory
+WORKDIR /app
+
+# Install serve globally
+RUN npm install -g serve
+
+# Copy the build output from the builder stage
+COPY --from=builder /app/dist/apps/web ./
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD ["serve", "-s", ".", "-l", "3000"]
