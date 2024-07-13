@@ -33,14 +33,14 @@ FROM node:18-alpine AS runner
 # Set working directory
 WORKDIR /app
 
-# Install serve globally
+# # Install serve globally
 RUN npm install -g serve
 
-# Copy the build output from the builder stage
+# # Copy the build output from the builder stage
 COPY --from=builder /app/dist/apps/web ./
 
-# Expose the port the app runs on
+# # Expose the port the app runs on
 EXPOSE 3000
 
-# Command to run the application
-CMD ["serve", "-s", ".", "-l", "3000"]
+# # Command to run the application
+# CMD ["serve", "-s", ".", "-l", "3000"]
