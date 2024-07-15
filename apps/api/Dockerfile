@@ -47,4 +47,4 @@ COPY --from=build /app/nx.json /app
 EXPOSE 3000
 
 # Set the command to run the application
-CMD ["npm", "run", "start:white"]
+CMD ["npm", "run", "start:migrated"]

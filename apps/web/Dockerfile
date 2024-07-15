@@ -9,38 +9,80 @@
 # 3. docker-compose up --build
 #
 
-# Stage 1: Build
-FROM node:18-alpine AS builder
+# # Stage 1: Build
+# FROM node:18-alpine AS builder
+# WORKDIR /app
 
-# Set working directory
+# COPY package*.json ./
+
+# RUN npm ci
+
+# COPY . .
+
+# RUN nonpx nx build web --configuration=production
+
+# # Stage 2: Serve
+# FROM node:18-alpine AS runner
+
+# WORKDIR /app
+
+# ENV NODE_ENV production
+
+# ENV NEXT_TELEMETRY_DISABLED 1
+
+# RUN addgroup --system --gid 1001 nodejs
+
+# RUN adduser --system --uid 1001 nextjs
+
+# COPY --from=builder /dist/apps/web/public ./public
+
+# RUN mkdir .next
+# RUN chown nextjs:nodejs .next
+
+# COPY --from=builder --chown=nextjs:nodejs /apps/web/.next/standalone ./
+# COPY --from=builder --chown=nextjs:nodejs /apps/web/.next/static ./.next/static
+
+# USER nextjs
+
+# EXPOSE 3000
+
+# ENV PORT 3000
+
+# CMD HOSTNAME="0.0.0.0" node server.js
+
+
+# Base image
+FROM node:20-alpine AS base
+
+# Stage 1: Dependencies
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
-
-# Copy the dependency files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm ci
 
-# Copy the rest of the codebase
-COPY . .
-
-# Build the Next.js app
-RUN npx nx build web --configuration=production
-
-# Stage 2: Serve
-FROM node:18-alpine AS runner
-
-# Set working directory
+# Stage 2: Build
+FROM base AS builder
 WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npx nx build web
 
-# # Install serve globally
-RUN npm install -g serve
+# Stage 3: Runner
+FROM base AS runner
+WORKDIR /app
+ENV NODE_ENV development
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# # Copy the build output from the builder stage
-COPY --from=builder /app/dist/apps/web ./
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
 
-# # Expose the port the app runs on
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone/apps/web ./standalone
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
+
+USER nextjs
+
 EXPOSE 3000
 
-# # Command to run the application
-# CMD ["serve", "-s", ".", "-l", "3000"]
+CMD ["node", "standalone/server.js"]
