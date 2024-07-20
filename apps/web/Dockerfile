@@ -1,26 +1,26 @@
-FROM node:20-alpine
-RUN ls -la .
-# WORKDIR /app
+# :: test steps ::
+# 
+# 1. npx nx build api  --configuration=production
+#
+# 2. docker-compose down -v
+#
+# 3. docker build --progress=plain --no-cache -t maryline/web2:0.0.1 -f apps/web2/Dockerfile .
+# 
+# 3. docker-compose up --build
+#
 
-# # Move to the root directory of the monorepo to copy the root package.json and package-lock.json
-# WORKDIR /maryline
-# COPY package.json package-lock.json ./
+FROM node:20-alpine AS base
 
-# # Debug: List the contents of /maryline
-# RUN ls -la /maryline
+WORKDIR /app
 
-# # Install dependencies from the root package.json
-# RUN npm install --legacy-peer-deps
+COPY package*.json ./
 
-# # Copy the web project files to the working directory /app
-# WORKDIR /app
-# COPY . .
+RUN npm i
 
-# # Debug: List the contents of /app after copying project files
-# RUN ls -la /app
+COPY apps/web .
 
-# # Build the web project
-# RUN npm run build --prefix /maryline
+EXPOSE 3000
 
-# EXPOSE 3000
-# CMD ["npm", "start"]
+ENV PORT 3000
+
+CMD ["npx", "next", "start"]

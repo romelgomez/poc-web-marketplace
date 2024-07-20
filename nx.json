@@ -14,7 +14,6 @@
     ],
     "sharedGlobals": []
   },
-  "nxCloudAccessToken": "MGE4YzhkOWEtM2FkYy00MTExLWJmMmYtZDk4ZjlhNzMxY2M4fHJlYWQtd3JpdGU=",
   "plugins": [
     {
       "plugin": "@nx/webpack/plugin",
@@ -27,9 +26,9 @@
     {
       "plugin": "@nx/next/plugin",
       "options": {
-        "startTargetName": "next:start",
-        "buildTargetName": "next:build",
-        "devTargetName": "next:dev",
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "startTargetName": "start",
         "serveStaticTargetName": "serve-static"
       }
     }
@@ -37,8 +36,7 @@
   "generators": {
     "@nx/next": {
       "application": {
-        "style": "scss",
-        "linter": "biome"
+        "style": "scss"
       }
     }
   },
