@@ -29,11 +29,6 @@ export type EnvironmentConfig = {
     secret: string;
     expiresIn: string;
   };
-  googleOAuthConfig: {
-    clientID: string;
-    clientSecret: string;
-    callbackURL: string;
-  };
   clerk: {
     issuerURL: string;
   };
@@ -55,10 +50,6 @@ export enum ProcessEnvEnum {
 
   JWT_SECRET = 'JWT_SECRET',
   JWT_EXPIRATION_TIME = 'JWT_EXPIRATION_TIME',
-
-  GOOGLE_CLIENT_ID = 'GOOGLE_CLIENT_ID',
-  GOOGLE_CLIENT_SECRET = 'GOOGLE_CLIENT_SECRET',
-  GOOGLE_CALLBACK_URL = 'GOOGLE_CALLBACK_URL',
 
   AT_SECRET = 'AT_SECRET',
   RT_SECRET = 'RT_SECRET',

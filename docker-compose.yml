@@ -28,7 +28,6 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3001
-      GOOGLE_CALLBACK_URL: http://localhost:3001/api/auth/google/redirect
       DATABASE_HOST: postgres
       DATABASE_PORT: 5432
       DATABASE_USER: developer
@@ -41,8 +40,6 @@ services:
       - postgres
       - meilisearch
     secrets:
-      - GOOGLE_CLIENT_ID
-      - GOOGLE_CLIENT_SECRET
       - DATABASE_PASSWORD
       - JWT_SECRET
       - JWT_EXPIRATION_TIME
@@ -70,10 +67,6 @@ volumes:
   meili_data:
 
 secrets:
-  GOOGLE_CLIENT_ID:
-    file: ./secrets/GOOGLE_CLIENT_ID
-  GOOGLE_CLIENT_SECRET:
-    file: ./secrets/GOOGLE_CLIENT_SECRET
   DATABASE_PASSWORD:
     file: ./secrets/DATABASE_PASSWORD
   JWT_SECRET:

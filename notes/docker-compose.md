@@ -26,8 +26,6 @@ maryline/
 ├── docker-compose.yml
 ├── .env
 ├── secrets/
-│   ├── GOOGLE_CLIENT_ID
-│   ├── GOOGLE_CLIENT_SECRET
 │   ├── DATABASE_PASSWORD
 │   ├── JWT_SECRET
 │   ├── JWT_EXPIRATION_TIME
@@ -37,4 +35,4 @@ maryline/
 │   ├── CLERK_SECRET_KEY
 ```
 
-where `GOOGLE_CLIENT_ID` is a file that hold a value
+where `DATABASE_PASSWORD` is a file that hold a value

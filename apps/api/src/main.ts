@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { AppConfigService } from './modules/config/config.service';
+import { hostname } from 'node:os';
 // import rateLimit from 'express-rate-limit';
 // import compression from 'compression';
 
@@ -64,7 +65,7 @@ async function bootstrap() {
   // Start the application
 
   const port = configService.getPort() || 3000;
-  await app.listen(port);
+  await app.listen(port, '0.0.0.0');
 
   logger.log(
     `\n\n ..:: Graphql is running on: http://localhost:${port}/graphql \n\n`,
