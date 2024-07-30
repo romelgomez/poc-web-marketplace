@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import './global.css';
 import 'antd/dist/reset.css';
 
 import { ConfigProvider as AntdConfigProvider } from 'antd';
