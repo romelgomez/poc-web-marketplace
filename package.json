@@ -5,7 +5,7 @@
   "scripts": {
     "serve:api": "npx nx serve api",
     "prisma-debug": "npx nx run api:prisma-debug --verbose",
-    "start:migrated": "npx prisma migrate dev --name init && npx prisma migrate deploy && node dist/apps/api/main.js"
+    "start:migrated": "npx prisma migrate deploy && node dist/apps/api/main.js"
   },
   "private": true,
   "dependencies": {
