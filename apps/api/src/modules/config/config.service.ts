@@ -25,21 +25,17 @@ export class AppConfigService {
       port: Number.parseInt(this.getEnvVal(ProcessEnvEnum.PORT), 10) || 3001,
       database: {
         type: DatabaseTypeEnum.Postgres,
-        host: this.getEnvVal(ProcessEnvEnum.DATABASE_HOST),
-        port: Number.parseInt(this.getEnvVal(ProcessEnvEnum.DATABASE_PORT), 10),
-        username: this.getEnvVal(ProcessEnvEnum.DATABASE_USER),
-        password: this.getEnvVal(ProcessEnvEnum.DATABASE_PASSWORD),
-        database: this.getEnvVal(ProcessEnvEnum.DATABASE_NAME),
+        host: this.getEnvVal(ProcessEnvEnum.PGHOST),
+        port: Number.parseInt(this.getEnvVal(ProcessEnvEnum.PGPORT), 10),
+        username: this.getEnvVal(ProcessEnvEnum.PGUSER),
+        password: this.getEnvVal(ProcessEnvEnum.PGPASSWORD),
+        database: this.getEnvVal(ProcessEnvEnum.PGDATABASE),
         synchronize: environment === EnvironmentEnum.Development,
         autoLoadEntities: true,
       },
       meili: {
         host: this.getEnvVal(ProcessEnvEnum.MEILI_HOST),
         apiKey: this.getEnvVal(ProcessEnvEnum.MEILI_KEY),
-      },
-      jwt: {
-        secret: this.getEnvVal(ProcessEnvEnum.JWT_SECRET),
-        expiresIn: this.getEnvVal(ProcessEnvEnum.JWT_EXPIRATION_TIME),
       },
       clerk: {
         issuerURL: this.getEnvVal(ProcessEnvEnum.CLERK_ISSUER_URL),
@@ -78,7 +74,4 @@ export class AppConfigService {
     return this.environmentConfig?.meili;
   }
 
-  public getJwtConfig() {
-    return this.environmentConfig?.jwt;
-  }
 }

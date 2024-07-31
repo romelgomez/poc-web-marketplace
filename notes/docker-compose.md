@@ -26,8 +26,7 @@ maryline/
 ├── docker-compose.yml
 ├── .env
 ├── secrets/
-│   ├── DATABASE_PASSWORD
-│   ├── JWT_SECRET
+│   ├── PGPASSWORD
 │   ├── JWT_EXPIRATION_TIME
 │   ├── AT_SECRET
 │   ├── RT_SECRET
@@ -35,4 +34,4 @@ maryline/
 │   ├── CLERK_SECRET_KEY
 ```
 
-where `DATABASE_PASSWORD` is a file that hold a value
+where `PGPASSWORD` is a file that hold a value

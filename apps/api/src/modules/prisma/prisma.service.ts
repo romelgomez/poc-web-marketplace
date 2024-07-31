@@ -11,14 +11,14 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor(protected appConfigService: AppConfigService) {
-    const host = appConfigService.getEnvVal(ProcessEnvEnum.DATABASE_HOST);
-    const port = appConfigService.getEnvVal(ProcessEnvEnum.DATABASE_PORT);
-    const user = appConfigService.getEnvVal(ProcessEnvEnum.DATABASE_USER);
+    const host = appConfigService.getEnvVal(ProcessEnvEnum.PGHOST);
+    const port = appConfigService.getEnvVal(ProcessEnvEnum.PGPORT);
+    const user = appConfigService.getEnvVal(ProcessEnvEnum.PGUSER);
     const password = appConfigService.getEnvVal(
-      ProcessEnvEnum.DATABASE_PASSWORD,
+      ProcessEnvEnum.PGPASSWORD,
     );
     const databaseName = appConfigService.getEnvVal(
-      ProcessEnvEnum.DATABASE_NAME,
+      ProcessEnvEnum.PGDATABASE,
     );
 
     const databaseUrl = `postgresql://${user}:${password}@${host}:${port}/${databaseName}?schema=public`;

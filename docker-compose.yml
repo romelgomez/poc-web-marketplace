@@ -28,11 +28,11 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3001
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_USER: developer
-      DATABASE_NAME: chevere
-      DATABASE_PASSWORD: developer
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: developer
+      PGDATABASE: chevere
+      PGPASSWORD: developer
       DATABASE_URL: postgres://developer:developer@postgres:5432/chevere?schema=public
       CLERK_ISSUER_URL: https://hardy-weasel-66.clerk.accounts.dev
       MEILI_HOST: http://meilisearch:7700
@@ -40,9 +40,7 @@ services:
       - postgres
       - meilisearch
     secrets:
-      - DATABASE_PASSWORD
-      - JWT_SECRET
-      - JWT_EXPIRATION_TIME
+      - PGPASSWORD
       - AT_SECRET
       - RT_SECRET
       - MEILI_KEY
@@ -67,12 +65,8 @@ volumes:
   meili_data:
 
 secrets:
-  DATABASE_PASSWORD:
-    file: ./secrets/DATABASE_PASSWORD
-  JWT_SECRET:
-    file: ./secrets/JWT_SECRET
-  JWT_EXPIRATION_TIME:
-    file: ./secrets/JWT_EXPIRATION_TIME
+  PGPASSWORD:
+    file: ./secrets/PGPASSWORD
   AT_SECRET:
     file: ./secrets/AT_SECRET
   RT_SECRET:
