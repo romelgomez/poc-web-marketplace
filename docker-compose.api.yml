@@ -44,20 +44,7 @@ services:
       - MEILI_KEY
     command: ["sh", "-c", "npx prisma migrate dev --name init && npx prisma migrate deploy && node dist/apps/api/main.js"]
 
-  web:
-    build:
-      context: .
-      dockerfile: apps/web/Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: pk_test_aGFyZHktd2Vhc2VsLTY2LmNsZXJrLmFjY291bnRzLmRldiQ
-    depends_on:
-      - api
-      - meilisearch
-      - postgres
-    secrets:
-      - CLERK_SECRET_KEY
+
 
 volumes:
   postgres_data:

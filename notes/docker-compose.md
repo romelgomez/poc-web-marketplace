@@ -27,7 +27,6 @@ maryline/
 ├── .env
 ├── secrets/
 │   ├── PGPASSWORD
-│   ├── JWT_EXPIRATION_TIME
 │   ├── MEILI_KEY
 │   ├── CLERK_SECRET_KEY
 ```

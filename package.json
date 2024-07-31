@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "prisma-debug": "nx run api:prisma-debug --verbose",
-    "start:migrated": "npx prisma generate && npx prisma migrate dev --name init && npx prisma migrate deploy && node dist/apps/api/main.js"
+    "serve:api": "npx nx serve api",
+    "prisma-debug": "npx nx run api:prisma-debug --verbose",
+    "start:migrated": "npx prisma migrate dev --name init && npx prisma migrate deploy && node dist/apps/api/main.js"
   },
   "private": true,
   "dependencies": {
