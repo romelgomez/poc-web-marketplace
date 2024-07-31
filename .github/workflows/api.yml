@@ -46,6 +46,11 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker images
-        run: |
-          docker buildx build --platform linux/amd64 -t ghcr.io/${{ github.repository_owner }}/maryline:latest --push -f apps/api/Dockerfile .
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: apps/api/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/maryline:latest
