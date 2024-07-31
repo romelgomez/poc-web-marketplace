@@ -44,8 +44,5 @@ export enum ProcessEnvEnum {
   MEILI_PORT = 'MEILI_PORT',
   MEILI_KEY = 'MEILI_KEY',
 
-  AT_SECRET = 'AT_SECRET',
-  RT_SECRET = 'RT_SECRET',
-
   CLERK_ISSUER_URL = 'CLERK_ISSUER_URL',
 }

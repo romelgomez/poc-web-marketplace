@@ -41,8 +41,6 @@ services:
       - meilisearch
     secrets:
       - PGPASSWORD
-      - AT_SECRET
-      - RT_SECRET
       - MEILI_KEY
 
   web:
@@ -67,10 +65,6 @@ volumes:
 secrets:
   PGPASSWORD:
     file: ./secrets/PGPASSWORD
-  AT_SECRET:
-    file: ./secrets/AT_SECRET
-  RT_SECRET:
-    file: ./secrets/RT_SECRET
   MEILI_KEY:
     file: ./secrets/MEILI_KEY
   CLERK_SECRET_KEY:

@@ -28,8 +28,6 @@ maryline/
 ├── secrets/
 │   ├── PGPASSWORD
 │   ├── JWT_EXPIRATION_TIME
-│   ├── AT_SECRET
-│   ├── RT_SECRET
 │   ├── MEILI_KEY
 │   ├── CLERK_SECRET_KEY
 ```
