@@ -28,4 +28,5 @@ COPY --from=build /app/nx.json /app
 
 EXPOSE 3001
 
-CMD ["npx", "nx", "serve", "api"]
+CMD ["npm", "run", "start:migrated"]
+
