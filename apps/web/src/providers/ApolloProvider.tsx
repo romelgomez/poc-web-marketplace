@@ -19,6 +19,13 @@ export default function ApolloProviderWrapper({ children }: Props) {
     uri: process.env.NEXT_PUBLIC_GRAPHQL,
   });
 
+
+  console.log({
+    tag: 'apollo',
+    endpoint: process.env.NEXT_PUBLIC_GRAPHQL,
+  });
+
+
   const authLink = setContext(async (_, { headers }) => {
     const token = await getAuthToken();
     return {
