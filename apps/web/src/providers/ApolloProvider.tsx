@@ -23,6 +23,7 @@ export default function ApolloProviderWrapper({ children }: Props) {
   console.log({
     tag: 'apollo',
     endpoint: process.env.NEXT_PUBLIC_GRAPHQL,
+    tag_id: process.env.TAG_ID
   });
 
 

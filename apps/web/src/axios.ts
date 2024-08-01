@@ -45,6 +45,7 @@ async function graphqlRequest<
     console.log({
       tag: 'axios',
       endpoint: graphqlEndpoint,
+      tag_id: process.env.TAG_ID
     });
 
     if (!graphqlEndpoint) {
