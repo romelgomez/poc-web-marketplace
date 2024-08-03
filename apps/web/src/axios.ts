@@ -42,12 +42,6 @@ async function graphqlRequest<
       variables,
     };
 
-    console.log({
-      tag: 'axios',
-      endpoint: graphqlEndpoint,
-      tag_id: process.env.TAG_ID
-    });
-
     if (!graphqlEndpoint) {
       throw new Error(
         'GraphQL endpoint is missing from environment variables.',
