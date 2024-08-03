@@ -1,1 +1,0 @@
-npx nx dev web
