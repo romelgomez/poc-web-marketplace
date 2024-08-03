@@ -1,4 +1,7 @@
-name: WEB CI
+# https://docs.github.com/en/actions
+# https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions
+
+name: 01-nextjs-app CI
 
 on:
   push:
@@ -27,13 +30,12 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm i
+        run: npm install
+        working-directory: 01-nextjs-app
 
       - name: Build
-        run: npx nx build web
-        env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+        run: npm run build
+        working-directory: 01-nextjs-app
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -46,20 +48,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Docker image
-        env:
-          CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
-          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
-          CLOUDINARY_SECRET: ${{ secrets.CLOUDINARY_SECRET }}
-          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
-          NEXT_PUBLIC_GRAPHQL: ${{ secrets.NEXT_PUBLIC_GRAPHQL }}
-          NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME }}
-          NEXT_PUBLIC_UPLOAD_PRESET: ${{ secrets.NEXT_PUBLIC_UPLOAD_PRESET }}
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-          TAG_ID: ${{ secrets.TAG_ID }}
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: apps/web/Dockerfile
+          context: 01-nextjs-app
+          file: 01-nextjs-app/Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/maryline-web:latest
+          tags: ghcr.io/${{ github.repository_owner }}/docker-monster-zero-one-nextjs-app:latest
+          build-args: |
+            TAG_ID: ${{ secrets.TAG_ID }}
