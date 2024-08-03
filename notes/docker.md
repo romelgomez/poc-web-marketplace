@@ -16,7 +16,14 @@ docker stop $(docker ps -aq)
 
 docker volume
 
+## to build the web docker
 
+```bash
+npx nx build api  --configuration=production
+docker-compose down -v
+docker build --progress=plain --no-cache -t maryline/web:0.0.1 -f apps/web/Dockerfile .
+docker-compose up --build
+```
 
 
 ## some random notes/ideas with docker to build the web
