@@ -14,6 +14,4 @@ ENV PORT 3000
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-ENV TAG2=002
-
 CMD ["npx", "next", "dev"]
