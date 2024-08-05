@@ -20,3 +20,17 @@ docker build --progress=plain --no-cache -t maryline/web:0.0.1 -f apps/web/Docke
 
 docker run -p 3000:3000 maryline/web:0.0.1
 ```
+
+## Notes
+
+### Clerk
+
+after the login, clerk call this endpoint to create the user in the database.
+
+`https://....ngrok-free.app/api/webhooks/user`
+
+internaly we have this webhooks defined here
+
+`apps/web/src/pages/api/webhooks/user.ts`
+
+
