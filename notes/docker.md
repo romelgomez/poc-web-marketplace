@@ -25,6 +25,7 @@ docker build --progress=plain --no-cache -t maryline/web:0.0.1 -f apps/web/Docke
 docker-compose up --build
 ```
 
+docker build --progress=plain --no-cache -t docker-moster/web:0.0.1 -f 01-nextjs-app/Dockerfile .
 
 ## some random notes/ideas with docker to build the web
 
