@@ -13,10 +13,17 @@ import ApolloProviderWrapper from '../providers/ApolloProvider';
 moment.locale('es');
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+
+  console.log(JSON.stringify({ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }, null, 2));
+
+
+
   return (
     <ClerkProvider
       {...pageProps}
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      // publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      publishableKey={'pk_test_aGFyZHktd2Vhc2VsLTY2LmNsZXJrLmFjY291bnRzLmRldiQ'}
     >
       <AntdConfigProvider locale={esES}>
         <ApolloProviderWrapper>
