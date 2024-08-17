@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: npx nx build web
         env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
