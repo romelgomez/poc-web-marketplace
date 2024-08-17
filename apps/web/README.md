@@ -75,3 +75,8 @@ Lastly, always be open to refactoring as your application grows. Your initial st
 resolve the filter for the search api
 
 - https://chat.openai.com/share/cba992d6-5fd1-4bb3-87fb-d4b9a1379e21
+
+
+## Docker
+
+https://www.temiz.dev/articles/how-to-reduce-nextjs-docker-image-size
