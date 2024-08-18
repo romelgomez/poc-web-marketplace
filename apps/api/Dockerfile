@@ -2,19 +2,21 @@ FROM node:18-alpine AS base
 
 WORKDIR /app
 
+RUN npm install -g pnpm
+
 FROM base AS build
 
 COPY package*.json ./
 
 COPY apps/api/prisma/schema.prisma ./prisma/
 
-RUN npm install
+RUN pnpm install --frozen-lockfile
 
 COPY . .
 
-RUN npx prisma generate
+RUN pnpm prisma generate
 
-RUN npx nx build api
+RUN pnpm nx build api
 
 FROM base AS runtime
 
@@ -28,5 +30,4 @@ COPY --from=build /app/nx.json /app
 
 EXPOSE 3001
 
-CMD ["npm", "run", "start:migrated"]
-
+CMD ["pnpm", "run", "start:migrated"]

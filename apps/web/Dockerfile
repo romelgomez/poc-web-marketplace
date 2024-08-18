@@ -2,9 +2,13 @@
 
 FROM node:20-alpine AS deps
 
+# Install pnpm globally
+RUN npm install -g pnpm
+
 COPY package*.json ./
 
-RUN npm ci
+# Install dependencies using pnpm
+RUN pnpm install --frozen-lockfile
 
 FROM node:20-alpine AS builder
 
@@ -21,7 +25,7 @@ COPY apps/web .
 
 COPY --from=deps /node_modules ./node_modules
 
-RUN npx next build
+RUN pnpm run build
 
 FROM node:20-alpine AS runner
 
