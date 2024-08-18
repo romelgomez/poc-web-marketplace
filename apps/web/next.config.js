@@ -13,7 +13,7 @@ const nextConfig = {
     'rc-tree',
     'rc-table',
   ],
-  output: 'standalone'
+  output: 'standalone',
 };
 
 module.exports = nextConfig;

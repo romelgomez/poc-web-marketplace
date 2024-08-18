@@ -14,12 +14,8 @@ export class PrismaService
     const host = appConfigService.getEnvVal(ProcessEnvEnum.PGHOST);
     const port = appConfigService.getEnvVal(ProcessEnvEnum.PGPORT);
     const user = appConfigService.getEnvVal(ProcessEnvEnum.PGUSER);
-    const password = appConfigService.getEnvVal(
-      ProcessEnvEnum.PGPASSWORD,
-    );
-    const databaseName = appConfigService.getEnvVal(
-      ProcessEnvEnum.PGDATABASE,
-    );
+    const password = appConfigService.getEnvVal(ProcessEnvEnum.PGPASSWORD);
+    const databaseName = appConfigService.getEnvVal(ProcessEnvEnum.PGDATABASE);
 
     const databaseUrl = `postgresql://${user}:${password}@${host}:${port}/${databaseName}?schema=public`;
 

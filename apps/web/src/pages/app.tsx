@@ -1,4 +1,3 @@
-
 import { Layout } from 'antd';
 import type { NextPage } from 'next';
 import React from 'react';

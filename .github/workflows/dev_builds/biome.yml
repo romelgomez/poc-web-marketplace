@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "**/README.md"
   pull_request:
     branches:
       - main
@@ -18,19 +20,21 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm i
 
       - name: Install Biome
-        run: npm install -g biome
+        run: pnpm add --save-dev --save-exact @biomejs/biome
 
       - name: Biome checks
-        working-directory: apps/api
-        run: biome format --write . && biome lint --write . && biome check --write .
+        run: pnpm biome format --write . && pnpm biome lint --write . && pnpm biome check --write .

@@ -13,7 +13,6 @@ import ApolloProviderWrapper from '../providers/ApolloProvider';
 moment.locale('es');
 
 function MyApp({ Component, pageProps }: AppProps) {
-
   return (
     <ClerkProvider
       {...pageProps}

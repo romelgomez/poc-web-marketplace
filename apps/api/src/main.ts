@@ -1,9 +1,9 @@
+import { hostname } from 'node:os';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { AppConfigService } from './modules/config/config.service';
-import { hostname } from 'node:os';
 // import rateLimit from 'express-rate-limit';
 // import compression from 'compression';
 

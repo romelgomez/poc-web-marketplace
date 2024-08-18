@@ -1,9 +1,9 @@
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { BadRequestException, Injectable } from '@nestjs/common';
 // biome-ignore lint: #caveat-with-typescript-experimental-decorators
 import { ConfigService } from '@nestjs/config';
 import type { EnvironmentConfig } from './config.types';
-import { existsSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
 
 import {
   DatabaseTypeEnum,
@@ -73,5 +73,4 @@ export class AppConfigService {
   public getMeiliConfig() {
     return this.environmentConfig?.meili;
   }
-
 }
