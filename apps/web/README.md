@@ -1,4 +1,4 @@
-## MercadoChevere.com
+## Store
 
 ```bash
 yarn dev

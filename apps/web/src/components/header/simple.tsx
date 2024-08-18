@@ -33,7 +33,7 @@ export const SimpleHeader = () => {
             style={{ paddingRight: '60px', cursor: 'pointer' }}
           >
             <span style={{ color: 'white' }}>
-              MercadoChevere
+              Store
               <span style={{ fontStyle: 'italic', color: 'aquamarine' }}>
                 .com
               </span>

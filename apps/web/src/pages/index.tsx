@@ -14,7 +14,7 @@ const Home: NextPage = () => {
             marginBottom: 40,
           }}
         >
-          <span>MercadoChevere.com</span>
+          <span>Store.com</span>
         </div>
 
         <div className={styles.grid} />

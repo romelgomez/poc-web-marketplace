@@ -48,7 +48,7 @@ export const Header = () => {
             }}
           >
             <span style={{ color: 'white' }}>
-              MercadoChevere
+              Store
               <span style={{ fontStyle: 'italic', color: 'aquamarine' }}>
                 .com
               </span>
