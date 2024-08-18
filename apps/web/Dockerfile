@@ -2,13 +2,11 @@
 
 FROM node:20-alpine AS deps
 
-# Install pnpm globally
 RUN npm install -g pnpm
 
 COPY package*.json ./
 
-# Install dependencies using pnpm
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 FROM node:20-alpine AS builder
 

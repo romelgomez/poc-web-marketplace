@@ -10,11 +10,11 @@ COPY package*.json ./
 
 COPY apps/api/prisma/schema.prisma ./prisma/
 
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
 
 COPY . .
 
-RUN pnpm prisma generate
+RUN prisma generate
 
 RUN pnpm nx build api
 
