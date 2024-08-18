@@ -4,7 +4,7 @@ FROM node:20-alpine AS deps
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
 FROM node:20-alpine AS builder
 
@@ -21,7 +21,7 @@ COPY apps/web .
 
 COPY --from=deps /node_modules ./node_modules
 
-RUN npm run build
+RUN npx next build
 
 FROM node:20-alpine AS runner
 

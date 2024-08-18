@@ -12,9 +12,9 @@ RUN npm install
 
 COPY . .
 
-RUN prisma generate
+RUN npx prisma generate
 
-RUN npm nx build api
+RUN npx nx build api
 
 FROM base AS runtime
 
