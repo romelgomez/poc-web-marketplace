@@ -31,7 +31,6 @@ export class AccountRepository {
   // create LISTING
   // link LISTING with ACCOUNT
 
-
   async create(data: UserInput) {
     // stage 1 - create user
     const user = await this.userService.createNewUserOrFail(data);

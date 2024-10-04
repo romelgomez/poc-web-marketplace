@@ -6,7 +6,8 @@
     "serve:api": "npx nx serve api",
     "prisma-debug": "npx nx run api:prisma-debug --verbose",
     "start:migrated": "npx prisma migrate deploy && node dist/apps/api/main.js",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check": "pnpm biome format --write . && pnpm biome lint --write . && pnpm biome check --write ."
   },
   "private": true,
   "dependencies": {
