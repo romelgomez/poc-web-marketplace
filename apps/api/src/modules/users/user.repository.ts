@@ -64,6 +64,10 @@ export class UserRepository {
     });
   }
 
+  // - search USER by email
+  // - if user exist FAIL the request
+  // create USER
+
   async createNewUserOrFail(userData: UserInput) {
     const { id, ...restUserData } = userData;
 
@@ -82,6 +86,7 @@ export class UserRepository {
     return user;
   }
 
+  // this stand for create a new user for the account
   async createUser(
     userData: UserInput,
     accountId: string,

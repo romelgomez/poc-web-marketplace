@@ -15,9 +15,28 @@ export class AccountRepository {
     private readonly userService: UserService,
   ) {}
 
+  // stage 1 - create user
+  // stage 2 - create account
+  // stage 3 - create role, link with user, link with account
+  // stage 4 - link the account with role
+  // stage 5 - create the default listing
+
+  // create USER or FAIL
+  // create ACCOUNT
+  // link ACCOUNT with USER
+  // create ROLE
+  // link ROLE with USER
+  // link ROLE with ACCOUNT
+  // link ACCOUNT with ROLE
+  // create LISTING
+  // link LISTING with ACCOUNT
+
+
   async create(data: UserInput) {
+    // stage 1 - create user
     const user = await this.userService.createNewUserOrFail(data);
 
+    // stage 2 - create account
     const account = await this.prisma.account.create({
       data: {
         name: `${user.firstName} account`,
@@ -29,7 +48,7 @@ export class AccountRepository {
       },
     });
 
-    // Create role for the user
+    // stage 3 - create role, link with user, link with account
     const role = await this.prisma.role.create({
       data: {
         role: RoleType.OWNER,
@@ -47,7 +66,7 @@ export class AccountRepository {
       },
     });
 
-    // Update the account with the new role
+    // stage 4 - link the account with role
     await this.prisma.account.update({
       where: { id: account.id },
       data: {
@@ -57,6 +76,7 @@ export class AccountRepository {
       },
     });
 
+    // stage 5 - create the default listing
     await this.prisma.listing.create({
       data: {
         account: {
